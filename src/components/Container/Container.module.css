@@ -2,7 +2,7 @@
   box-sizing: border-box;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 128px;
 }
 
 @media (max-width: 320px) {
