@@ -1,19 +1,10 @@
 import { Link } from "react-router-dom";
-import clsx from "clsx";
 import css from "./Logo.module.css";
 
-interface LogoProps {
-  className?: string;
-}
-
-export default function Logo({ className }: LogoProps) {
+export default function Logo() {
   return (
-    <Link
-      to="/"
-      aria-label="Nanny.Services — Home"
-      className={clsx(css.logo, className)}
-    >
-      <span className={css.logo}>Nanny.Services</span>
+    <Link to="/" aria-label="Nanny.Services — Home" className={css.logo}>
+      <span className={css.text}>Nanny.Services</span>
     </Link>
   );
 }

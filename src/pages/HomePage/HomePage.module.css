@@ -1,0 +1,64 @@
+.split {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+
+  /* размер блока как у макета */
+  min-height: 560px;
+}
+
+/* Общие настройки для фоновых половин */
+.bgLeft,
+.bgRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 0;
+}
+
+/* Левая половина — красная */
+.bgLeft {
+  left: 0;
+  background: var(--color-accent-red);
+}
+
+/* Правая половина — картинка + затемнение */
+.bgRight {
+  right: 0;
+  background-image: url("/hero.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* затемнение фото */
+.bgRight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Поднимаем весь контент над фоном */
+.split > *:not(.bgLeft):not(.bgRight) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Адаптив: на узких экранах делаем в колонку */
+@media (max-width: 900px) {
+  .bgLeft,
+  .bgRight {
+    width: 100%;
+  }
+
+  .bgLeft {
+    height: 55%;
+    bottom: auto;
+  }
+
+  .bgRight {
+    top: 55%;
+    height: 45%;
+  }
+}
