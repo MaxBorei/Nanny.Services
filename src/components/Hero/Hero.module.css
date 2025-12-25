@@ -1,7 +1,6 @@
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-
   border-radius: 24px;
   overflow: hidden;
   min-height: 520px;
@@ -75,20 +74,7 @@
 }
 
 .right {
-  position: relative;
-
-  /* ЗАМЕНИ на свою картинку */
-  background-image: url("/hero.jpg");
-  background-size: cover;
-  background-position: center;
-
-  min-height: 520px;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: transparent;
 }
 
 .badge {
