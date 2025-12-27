@@ -1,14 +1,12 @@
 .header {
-  /* display: flex; */
   background: transparent;
   padding: 20px 96px;
-
   border-bottom: 1px solid rgba(251, 251, 251, 0.4);
 }
 
 .inner {
   align-items: center;
-  text-align: center;
+  justify-content: space-between;
   height: 48px;
   width: 1184px;
   display: flex;
@@ -25,7 +23,6 @@
 
 .navLink {
   position: relative;
-
   font-family: var(--font-family-base);
   font-weight: var(--fw-medium);
   font-size: var(--fs-16);
@@ -41,4 +38,68 @@
 
 .navLink:hover {
   color: #ffffff;
+}
+
+.authActions {
+  display: flex;
+  gap: 8px;
+}
+
+/* base */
+.authBtn {
+  height: 44px;
+  padding: 0 26px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+/* ghost */
+.authBtnGhost {
+  border: 1px solid rgba(251, 251, 251, 0.4);
+  border-radius: 30px;
+  padding: 14px 39px;
+  width: 124px;
+  height: 48px;
+  font-family: var(--font-family-base);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-16);
+  line-height: var(--lh-16);
+  letter-spacing: -0.01em;
+  color: var(--color-text-inverse);
+}
+
+.authBtnGhost:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* primary */
+.authBtnPrimary {
+  background: var(--color-accent-primary);
+  border-radius: 30px;
+  padding: 14px 40px;
+  width: 168px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-base);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-16);
+  line-height: var(--lh-16);
+  letter-spacing: -0.01em;
+  color: var(--color-text-inverse);
+}
+
+.authBtnPrimary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(255, 59, 59, 0.45);
+}
+
+.navContainer {
+  display: flex;
+  gap: 92px;
 }

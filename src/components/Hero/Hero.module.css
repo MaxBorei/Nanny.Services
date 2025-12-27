@@ -63,14 +63,8 @@
 }
 
 .ctaIcon {
-  display: inline-flex;
-  width: 22px;
-  height: 22px;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  stroke-width: 2px;
+  fill: #fbfbfb;
 }
 
 .right {

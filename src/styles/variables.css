@@ -110,4 +110,109 @@
 
   --transition-fast: 0.15s ease;
   --transition-base: 0.3s ease;
+
+  /* ================= FLUID SCALE (320 → 1280) ================= */
+
+  /* базовые размеры вьюпорта */
+  --vw-min: 320;
+  --vw-max: 1280;
+  --vw-range: calc(var(--vw-max) - var(--vw-min));
+
+  /* ---------- FLUID FONT SIZES ---------- */
+  /* 18 → 24 (основной крупный текст / hero) */
+  --fluid-fs-18-24: calc(
+    18px + (24 - 18) * ((100vw - 320px) / var(--vw-range))
+  );
+
+  /* 16 → 20 (обычный текст / кнопки) */
+  --fluid-fs-16-20: calc(
+    16px + (20 - 16) * ((100vw - 320px) / var(--vw-range))
+  );
+
+  /* ---------- FLUID SIZES ---------- */
+  /* logo 120 → 164 */
+  --fluid-logo-120-164: calc(
+    120px + (164 - 120) * ((100vw - 320px) / var(--vw-range))
+  );
+
+  /* ---------- FLUID SPACING ---------- */
+  /* 16 → 24 */
+  --fluid-sp-16-24: calc(
+    16px + (24 - 16) * ((100vw - 320px) / var(--vw-range))
+  );
+
+  /* HERO: 320 → 1280 */
+  --fluid-hero-title: calc(
+    40px + (56 - 40) * ((100vw - 320px) / var(--vw-range))
+  );
+  --fluid-hero-subtitle: calc(
+    16px + (18 - 16) * ((100vw - 320px) / var(--vw-range))
+  );
+
+  --fluid-hero-gap: calc(
+    12px + (18 - 12) * ((100vw - 320px) / var(--vw-range))
+  );
+
+  /* padding left: 48/24 → 72/64 */
+  --fluid-hero-pad-y: calc(
+    48px + (72 - 48) * ((100vw - 320px) / var(--vw-range))
+  );
+  --fluid-hero-pad-x: calc(
+    24px + (64 - 24) * ((100vw - 320px) / var(--vw-range))
+  );
+  --fluid-hero-pad: var(--fluid-hero-pad-y) var(--fluid-hero-pad-x);
+
+  /* badge offsets/padding: 16→28 и 12/16 → 14/18 */
+  --fluid-badge-offset: calc(
+    16px + (28 - 16) * ((100vw - 320px) / var(--vw-range))
+  );
+  --fluid-badge-pad-y: calc(
+    12px + (14 - 12) * ((100vw - 320px) / var(--vw-range))
+  );
+  --fluid-badge-pad-x: calc(
+    16px + (18 - 16) * ((100vw - 320px) / var(--vw-range))
+  );
+  --fluid-badge-pad: var(--fluid-badge-pad-y) var(--fluid-badge-pad-x);
+  /* HEADER: 320 → 1280 */
+  --fluid-header-pad-y: calc(
+    16px + (20 - 16) * ((100vw - 320px) / var(--vw-range))
+  );
+  --fluid-header-pad-x: calc(
+    16px + (96 - 16) * ((100vw - 320px) / var(--vw-range))
+  );
+
+  /* расстояния */
+  --fluid-inner-gap: calc(
+    12px + (24 - 12) * ((100vw - 320px) / var(--vw-range))
+  );
+  --fluid-nav-gap: calc(16px + (24 - 16) * ((100vw - 320px) / var(--vw-range)));
+  --fluid-navcontainer-gap: calc(
+    16px + (92 - 16) * ((100vw - 320px) / var(--vw-range))
+  );
+  --fluid-container-pad: calc(
+    16px + (32 - 16) * ((100vw - 320px) / var(--vw-range))
+  );
+
+  @media (max-width: 320px) {
+    :root {
+      --fluid-fs-18-24: 18px;
+      --fluid-fs-16-20: 16px;
+      --fluid-logo-120-164: 120px;
+      --fluid-sp-16-24: 16px;
+      --fluid-hero-title: 40px;
+      --fluid-hero-subtitle: 16px;
+      --fluid-hero-gap: 12px;
+      --fluid-hero-pad-y: 48px;
+      --fluid-hero-pad-x: 24px;
+      --fluid-badge-offset: 16px;
+      --fluid-badge-pad-y: 12px;
+      --fluid-badge-pad-x: 16px;
+      --fluid-header-pad-y: 16px;
+      --fluid-header-pad-x: 16px;
+      --fluid-inner-gap: 12px;
+      --fluid-nav-gap: 16px;
+      --fluid-navcontainer-gap: 16px;
+      --fluid-container-pad: 16px;
+    }
+  }
 }

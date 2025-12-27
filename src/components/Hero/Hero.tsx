@@ -15,10 +15,16 @@ export default function Hero() {
         </p>
 
         <button className={css.cta} type="button">
-          <span>Get started</span>
-          <span className={css.ctaIcon} aria-hidden="true">
-            ↗
-          </span>
+          <span className={css.ctaText}>Get started</span>
+
+          <svg
+            className={css.ctaIcon}
+            width="14"
+            height="16"
+            aria-hidden="true"
+          >
+            <use href="/vite.svg#icon-Arrow" />
+          </svg>
         </button>
       </div>
 
