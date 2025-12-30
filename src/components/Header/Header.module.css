@@ -37,7 +37,7 @@
 }
 
 .navLink:hover {
-  color: #ffffff;
+  color: var(--color-text-hover);
 }
 
 .authActions {
@@ -95,8 +95,8 @@
 }
 
 .authBtnPrimary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 26px rgba(255, 59, 59, 0.45);
+  background: var(--color-bg-inverse);
+  color: var(--color-text-hover);
 }
 
 .navContainer {

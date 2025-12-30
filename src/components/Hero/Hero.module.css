@@ -9,22 +9,22 @@
 
 .left {
   background: var(--color-accent-red);
-  padding: 72px 64px;
-
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 18px;
+  width: 517px;
+  height: 322px;
+  margin-left: 96px;
+  margin-top: 163px;
 }
 
 .title {
-  margin: 0;
   color: var(--color-text-inverse);
   font-family: var(--font-family-base);
   font-weight: var(--fw-bold);
   font-size: 56px;
   line-height: 1.05;
   letter-spacing: -0.02em;
+  margin-bottom: 28px;
 }
 
 .subtitle {
@@ -34,6 +34,7 @@
   font-weight: var(--fw-regular);
   font-size: 18px;
   line-height: 1.4;
+  margin-bottom: 64px;
 }
 
 .cta {
@@ -57,14 +58,18 @@
     background var(--transition-base);
 }
 
-.cta:hover {
-  border-color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.08);
+.cta:hover .ctaIcon {
+  transform: rotate(55deg);
+  transform-origin: center;
+  transition: transform 0.2s ease;
 }
 
 .ctaIcon {
+  width: 20px;
+  height: 15px;
+  fill: var(--color-accent-inverse);
   stroke-width: 2px;
-  fill: #fbfbfb;
+  transform: rotate(0deg);
 }
 
 .right {
