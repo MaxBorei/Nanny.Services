@@ -1,8 +1,3 @@
-/* =====================================================
-   DESIGN TOKENS — NANNY.SERVICES
-   Source: Figma Variables
-   ===================================================== */
-
 :root {
   /* ================= COLORS ================= */
 
@@ -37,6 +32,7 @@
   --color-text-secondary: #6b7280;
   --color-text-inverse: #fbfbfb;
   --color-text-hover: #f03f3b;
+  --color-text-third: #11101c;
 
   /* Borders */
   --color-border-light: rgba(0, 0, 0, 0.08);
@@ -45,7 +41,7 @@
   /* ================= TYPOGRAPHY ================= */
 
   /* Font family */
-  --font-family-base: "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-family: "Helvetica Neue", sans-serif;
 
   /* Font weights */
   --fw-regular: 400;
@@ -59,6 +55,8 @@
   --fs-18: 18px;
   --fs-20: 20px;
   --fs-24: 24px;
+  --fs-28: 28px;
+  --fs-70: 70px;
 
   /* Line heights */
   --lh-12: 16px;
@@ -70,7 +68,9 @@
 
   /* Letter spacing */
   --ls-normal: 0;
+  --ls-ltight: -0.01em;
   --ls-tight: -0.02em;
+  --ls-tighter: -0.03em;
 
   /* ================= SPACING ================= */
 
@@ -90,6 +90,7 @@
   --radius-8: 8px;
   --radius-12: 12px;
   --radius-16: 16px;
+  --radius-30: 30px;
   --radius-pill: 9999px;
 
   /* ================= BUTTONS ================= */

@@ -15,7 +15,7 @@
 /* Body defaults */
 body {
   min-height: 100vh;
-  font-family: var(--font-family-base);
+  font-family: var(--font-family);
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   line-height: 1.5;

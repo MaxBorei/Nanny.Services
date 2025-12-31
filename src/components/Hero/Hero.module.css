@@ -3,7 +3,7 @@
   grid-template-columns: 1fr 1fr;
   border-radius: 24px;
   overflow: hidden;
-  min-height: 520px;
+  min-height: 648px;
   background: transparent;
 }
 
@@ -18,44 +18,45 @@
 }
 
 .title {
+  font-family: var(--font-family);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-70);
+  line-height: 1;
+  letter-spacing: var(--ls-tighter);
   color: var(--color-text-inverse);
-  font-family: var(--font-family-base);
-  font-weight: var(--fw-bold);
-  font-size: 56px;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
   margin-bottom: 28px;
 }
 
 .subtitle {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.92);
-  font-family: var(--font-family-base);
+  font-family: var(--font-family);
   font-weight: var(--fw-regular);
-  font-size: 18px;
-  line-height: 1.4;
+  font-size: var(--fs-28);
+  line-height: 1.07;
+  letter-spacing: var(--ls-tight);
+  color: var(--color-text-inverse);
   margin-bottom: 64px;
 }
 
 .cta {
-  margin-top: 18px;
-
-  width: fit-content;
+  width: 230.83px;
+  height: 60px;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-
-  padding: 12px 22px;
-  border-radius: 9999px;
-
+  gap: 18px;
+  border: 1px solid rgba(251, 251, 251, 0.4);
+  border-radius: var(--radius-30);
+  padding: 18px 50px;
   background: transparent;
   color: var(--color-text-inverse);
+}
 
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  cursor: pointer;
-
-  transition: border-color var(--transition-base),
-    background var(--transition-base);
+.ctaText {
+  font-family: var(--font-family);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-20);
+  line-height: 1.2;
+  letter-spacing: var(--ls-ltight);
+  color: var(--color-text-inverse);
 }
 
 .cta:hover .ctaIcon {
@@ -65,8 +66,6 @@
 }
 
 .ctaIcon {
-  width: 20px;
-  height: 15px;
   fill: var(--color-accent-inverse);
   stroke-width: 2px;
   transform: rotate(0deg);
@@ -77,15 +76,17 @@
 }
 
 .badge {
+  width: 284px;
+  height: 118px;
   position: absolute;
-  right: 28px;
-  bottom: 28px;
+  right: 50px;
+  bottom: 50px;
 
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 
-  padding: 14px 18px;
+  padding: 32px;
   border-radius: 16px;
 
   background: rgba(255, 255, 255, 0.92);
@@ -93,8 +94,8 @@
 }
 
 .badgeIcon {
-  width: 40px;
-  height: 40px;
+  width: 54px;
+  height: 54px;
 
   display: flex;
   align-items: center;
@@ -106,21 +107,28 @@
   font-weight: 700;
 }
 
+.badgeIconSvg {
+  fill: var(--color-text-inverse);
+}
+
 .badgeText {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 6px;
 }
 
 .badgeLabel {
-  font-size: 12px;
-  color: rgba(17, 17, 17, 0.6);
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-16);
+  color: rgba(17, 16, 28, 0.5);
 }
 
 .badgeValue {
-  font-size: 18px;
-  font-weight: 700;
-  color: #111;
+  font-family: var(--font-family);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-24);
+  color: var(--color-text-third);
 }
 
 @media (max-width: 320px) {

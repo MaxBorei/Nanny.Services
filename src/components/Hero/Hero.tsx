@@ -32,8 +32,15 @@ export default function Hero() {
         <div className={css.overlay} />
 
         <div className={css.badge} role="note" aria-label="Experienced nannies">
-          <div className={css.badgeIcon} aria-hidden="true">
-            ✓
+          <div className={css.badgeIcon}>
+            <svg
+              className={css.badgeIconSvg}
+              width="20"
+              height="15"
+              aria-hidden="true"
+            >
+              <use href="/vite.svg#icon-feCheck" />
+            </svg>
           </div>
 
           <div className={css.badgeText}>

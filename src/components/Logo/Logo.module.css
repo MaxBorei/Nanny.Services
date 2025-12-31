@@ -4,7 +4,7 @@
 }
 
 .text {
-  font-family: var(--font-family-base);
+  font-family: var(--font-family);
   font-weight: var(--fw-medium);
   font-size: var(--fs-24);
   line-height: var(--lh-24);
