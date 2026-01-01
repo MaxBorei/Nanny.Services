@@ -3,11 +3,14 @@ import clsx from "clsx";
 import Logo from "../Logo/Logo";
 import css from "./Header.module.css";
 import type { NavLinkProps } from "react-router-dom";
+import { useState } from "react";
+import AuthModal from "../AuthModal/AuthModal";
 
 const getNavLinkClass: NavLinkProps["className"] = ({ isActive }) =>
   clsx(css.navLink, isActive && css.navLinkActive);
 
 export default function Header() {
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   return (
     <header className={css.header}>
       <div className={css.inner}>
@@ -27,9 +30,15 @@ export default function Header() {
             <button
               type="button"
               className={clsx(css.authBtn, css.authBtnGhost)}
+              onClick={() => setIsAuthModalOpen(true)}
             >
               Log In
             </button>
+
+            <AuthModal
+              isOpen={isAuthModalOpen}
+              onClose={() => setIsAuthModalOpen(false)}
+            />
 
             <button
               type="button"
