@@ -47,7 +47,6 @@
 
 /* base */
 .authBtn {
-  height: 44px;
   padding: 0 26px;
   border-radius: 999px;
   border: 1px solid transparent;
@@ -63,13 +62,17 @@
   border-radius: 30px;
   padding: 14px 39px;
   width: 124px;
-  height: 48px;
+  /* height: 48px; */
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
   font-size: var(--fs-16);
-  line-height: var(--lh-16);
+  line-height: 1;
   letter-spacing: -0.01em;
   color: var(--color-text-inverse);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .authBtnGhost:hover {
