@@ -1,9 +1,11 @@
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-radius: 24px;
+
+  border-radius: clamp(12px, 1.6vw, 24px);
+  min-height: clamp(420px, 45vw, 648px);
+
   overflow: hidden;
-  min-height: 648px;
   background: transparent;
 }
 
@@ -11,41 +13,47 @@
   background: var(--color-accent-red);
   display: flex;
   flex-direction: column;
-  width: 517px;
-  height: 322px;
-  margin-left: 96px;
-  margin-top: 163px;
+  margin: auto;
 }
 
 .title {
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
-  font-size: var(--fs-70);
+
+  font-size: clamp(var(--fs-28), 4.86vw, var(--fs-70));
   line-height: 1;
   letter-spacing: var(--ls-tighter);
   color: var(--color-text-inverse);
-  margin-bottom: 28px;
+
+  margin-bottom: clamp(12px, 1.94vw, 28px);
 }
 
 .subtitle {
   font-family: var(--font-family);
   font-weight: var(--fw-regular);
-  font-size: var(--fs-28);
-  line-height: 1.07;
+
+  font-size: clamp(var(--fs-12), 1.94vw, var(--fs-28));
+  line-height: 1.2;
   letter-spacing: var(--ls-tight);
   color: var(--color-text-inverse);
-  margin-bottom: 64px;
+
+  margin-bottom: clamp(20px, 4.44vw, 64px);
 }
 
 .cta {
-  width: 231px;
-  height: 60px;
+  width: clamp(200px, 16vw, 231px);
+  min-height: clamp(48px, 4.2vw, 60px);
+
   display: inline-flex;
   align-items: center;
-  gap: 18px;
+  gap: clamp(10px, 1.25vw, 18px);
+
   border: 1px solid rgba(251, 251, 251, 0.4);
   border-radius: var(--radius-30);
-  padding: 18px 50px;
+
+  padding-block: clamp(14px, 1.25vw, 18px);
+  padding-inline: clamp(18px, 3.47vw, 50px);
+
   background: transparent;
   color: var(--color-text-inverse);
   white-space: nowrap;
@@ -54,7 +62,7 @@
 .ctaText {
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
-  font-size: var(--fs-20);
+  font-size: clamp(14px, 1.39vw, var(--fs-20));
   line-height: 1.2;
   letter-spacing: var(--ls-ltight);
   color: var(--color-text-inverse);
@@ -70,9 +78,11 @@
   fill: var(--color-accent-inverse);
   stroke-width: 2px;
   transform: rotate(0deg);
-  width: 14px;
-  height: 16px;
-  flex: 0 0 16px;
+
+  width: clamp(12px, 1vw, 14px);
+  height: clamp(12px, 1.1vw, 16px);
+  flex: 0 0 clamp(12px, 1.1vw, 16px);
+
   display: block;
 }
 
@@ -81,32 +91,34 @@
 }
 
 .badge {
-  width: 284px;
-  height: 118px;
+  width: clamp(220px, 19.7vw, 284px);
+  height: auto;
+
   position: absolute;
-  right: 50px;
-  bottom: 50px;
+  right: clamp(12px, 3.47vw, 50px);
+  bottom: clamp(12px, 3.47vw, 50px);
 
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: clamp(10px, 1.11vw, 16px);
 
-  padding: 32px;
-  border-radius: 16px;
+  padding: clamp(14px, 2.22vw, 32px);
+  border-radius: clamp(12px, 1.11vw, 16px);
 
   background: rgba(255, 255, 255, 0.92);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 }
 
 .badgeIcon {
-  width: 54px;
-  height: 54px;
+  width: clamp(36px, 3.75vw, 54px);
+  height: clamp(36px, 3.75vw, 54px);
   flex-shrink: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 12px;
+  border-radius: clamp(8px, 0.83vw, 12px);
   background: var(--color-accent-red);
   color: #fff;
   font-weight: 700;
@@ -119,13 +131,13 @@
 .badgeText {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: clamp(4px, 0.41vw, 6px);
 }
 
 .badgeLabel {
   font-family: var(--font-family);
   font-weight: var(--fw-regular);
-  font-size: var(--fs-16);
+  font-size: clamp(12px, 1.11vw, var(--fs-16));
   color: rgba(17, 16, 28, 0.5);
   white-space: nowrap;
   margin: 0;
@@ -135,7 +147,7 @@
 .badgeValue {
   font-family: var(--font-family);
   font-weight: var(--fw-bold);
-  font-size: var(--fs-24);
+  font-size: clamp(16px, 1.66vw, var(--fs-24));
   color: var(--color-text-third);
   margin: 0;
   line-height: 1.2;
@@ -144,17 +156,30 @@
 @media (max-width: 320px) {
   .hero {
     grid-template-columns: 1fr;
-  }
-
-  .left {
-    padding: 48px 24px;
+    min-height: auto;
+    border-radius: var(--radius-16);
   }
 
   .title {
-    font-size: 40px;
+    font-size: var(--fs-16);
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .left {
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+    margin-top: 0;
+    padding: 16px;
   }
 
   .right {
-    min-height: 360px;
+    min-height: 320px;
   }
 }
