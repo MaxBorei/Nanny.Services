@@ -1,38 +1,45 @@
 .header {
   background: transparent;
-  padding: 20px 96px;
+  padding-block: clamp(14px, 1.39vw, 20px);
+  padding-inline: clamp(16px, 6.66vw, 96px);
   border-bottom: 1px solid rgba(251, 251, 251, 0.4);
 }
 
 .inner {
-  align-items: center;
-  justify-content: space-between;
-  height: 48px;
-  width: 1184px;
   display: flex;
   align-items: center;
-  gap: 487px;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 1184px;
+
+  gap: clamp(12px, 2.5vw, 32px);
+  min-height: 48px;
+
+  margin: 0 auto;
 }
 
 /* NAV */
 .nav {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: clamp(10px, 1.66vw, 24px);
+  min-width: 0;
 }
 
 .navLink {
   position: relative;
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
-  font-size: var(--fs-16);
-  line-height: var(--lh-16);
-  letter-spacing: var(--ls-tight);
 
+  font-size: clamp(12px, 1.11vw, var(--fs-16));
+  line-height: 1.2;
+
+  letter-spacing: var(--ls-tight);
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
 
-  padding: 6px 2px;
+  padding: clamp(4px, 0.42vw, 6px) 2px;
   transition: color var(--transition-base);
 }
 
@@ -42,16 +49,16 @@
 
 .authActions {
   display: flex;
-  gap: 8px;
+  gap: clamp(6px, 0.55vw, 8px);
+  flex-shrink: 0;
 }
 
-/* base */
 .authBtn {
-  padding: 0 26px;
+  padding-inline: clamp(14px, 1.8vw, 26px);
   border-radius: 999px;
   border: 1px solid transparent;
   font-weight: 600;
-  font-size: 16px;
+  font-size: clamp(14px, 1.11vw, 16px);
   cursor: pointer;
   transition: all 0.15s ease;
 }
@@ -60,15 +67,21 @@
 .authBtnGhost {
   border: 1px solid rgba(251, 251, 251, 0.4);
   border-radius: 30px;
-  padding: 14px 39px;
-  width: 124px;
-  /* height: 48px; */
+
+  /* вместо фикс width + огромного padding */
+  padding: clamp(12px, 1vw, 14px) clamp(16px, 2.7vw, 39px);
+  min-height: clamp(40px, 3.33vw, 48px);
+
+  width: auto; /* ключ */
+  min-width: clamp(96px, 9vw, 124px);
+
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
-  font-size: var(--fs-16);
+  font-size: clamp(12px, 1.11vw, var(--fs-16));
   line-height: 1;
   letter-spacing: -0.01em;
   color: var(--color-text-inverse);
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -83,16 +96,21 @@
 .authBtnPrimary {
   background: var(--color-accent-primary);
   border-radius: 30px;
-  padding: 14px 40px;
-  width: 168px;
-  height: 48px;
+
+  padding: clamp(12px, 1vw, 14px) clamp(16px, 2.8vw, 40px);
+  min-height: clamp(40px, 3.33vw, 48px);
+
+  width: auto; /* ключ */
+  min-width: clamp(120px, 12vw, 168px);
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
-  font-size: var(--fs-16);
-  line-height: var(--lh-16);
+  font-size: clamp(12px, 1.11vw, var(--fs-16));
+  line-height: 1.2;
   letter-spacing: -0.01em;
   color: var(--color-text-inverse);
 }
@@ -104,5 +122,18 @@
 
 .navContainer {
   display: flex;
-  gap: 92px;
+  align-items: center;
+  gap: clamp(12px, 6.4vw, 92px);
+  min-width: 0;
+}
+
+@media (max-width: 320px) {
+  .nav {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .navContainer {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
 }

@@ -1,13 +1,15 @@
 .logo {
-  width: 164px;
-  height: 28px;
+  width: clamp(120px, 11.4vw, 164px);
+  height: auto;
 }
 
 .text {
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
-  font-size: var(--fs-24);
-  line-height: var(--lh-24);
+
+  font-size: clamp(14px, 1.66vw, var(--fs-24));
+  line-height: 1.25;
+
   letter-spacing: var(--ls-tight);
   color: var(--color-text-inverse);
 }

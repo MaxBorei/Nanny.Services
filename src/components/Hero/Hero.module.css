@@ -62,7 +62,7 @@
 .ctaText {
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
-  font-size: clamp(14px, 1.39vw, var(--fs-20));
+  font-size: clamp(var(--fs-14), 1.39vw, var(--fs-20));
   line-height: 1.2;
   letter-spacing: var(--ls-ltight);
   color: var(--color-text-inverse);
@@ -88,6 +88,12 @@
 
 .right {
   background: transparent;
+}
+
+.right img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .badge {
@@ -137,7 +143,7 @@
 .badgeLabel {
   font-family: var(--font-family);
   font-weight: var(--fw-regular);
-  font-size: clamp(12px, 1.11vw, var(--fs-16));
+  font-size: clamp(var(--fs-12), 1.11vw, var(--fs-16));
   color: rgba(17, 16, 28, 0.5);
   white-space: nowrap;
   margin: 0;
@@ -147,10 +153,16 @@
 .badgeValue {
   font-family: var(--font-family);
   font-weight: var(--fw-bold);
-  font-size: clamp(16px, 1.66vw, var(--fs-24));
+  font-size: clamp(var(--fs-16), 1.66vw, var(--fs-24));
   color: var(--color-text-third);
   margin: 0;
   line-height: 1.2;
+}
+
+@media (max-width: 767px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 320px) {

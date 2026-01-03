@@ -1,3 +1,5 @@
+import css from "./LoginForm.module.css";
+
 type LoginFormProps = {
   onSubmit: (data: { email: string; password: string }) => void;
 };
@@ -15,10 +17,35 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="email" type="email" placeholder="Email" required />
-      <input name="password" type="password" placeholder="Password" required />
-      <button type="submit">Sign in</button>
+    <form className={css.form} onSubmit={handleSubmit}>
+      <input
+        className={css.input}
+        name="email"
+        type="email"
+        placeholder="Email"
+        required
+      />
+
+      <div className={css.field}>
+        <input
+          className={`${css.input} ${css.inputWithIcon}`}
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
+        <button
+          type="button"
+          className={css.iconBtn}
+          aria-label="Toggle password visibility"
+        >
+          👁
+        </button>
+      </div>
+
+      <button className={css.submit} type="submit">
+        Log In
+      </button>
     </form>
   );
 }

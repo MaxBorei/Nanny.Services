@@ -1,12 +1,7 @@
 .container {
   box-sizing: border-box;
   max-width: 1440px;
-  padding: 0 32px;
-}
-
-@media (max-width: 320px) {
-  .container {
-    max-width: 320px;
-    padding: 0 16px;
-  }
+  width: 100%;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 2.22vw, 32px);
 }
