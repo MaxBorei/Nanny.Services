@@ -44,6 +44,7 @@
   background: transparent;
   cursor: pointer;
   color: rgba(17, 16, 28, 0.55);
+  justify-content: center;
 }
 
 .iconBtn:hover {
@@ -63,4 +64,15 @@
 
 .submit:hover {
   filter: brightness(0.96);
+}
+
+.ctaIcon {
+  width: clamp(12px, 1vw, 20px);
+  height: clamp(12px, 1.1vw, 20px);
+  flex: 0 0 clamp(12px, 1.1vw, 20px);
+  display: block;
+
+  fill: var(--color-accent-inverse);
+  stroke: var(--color-text-third);
+  stroke-width: 2px;
 }

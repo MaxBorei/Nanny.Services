@@ -19,8 +19,17 @@
   margin: 0 auto;
 }
 
-/* NAV */
-.nav {
+.logo {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-family: var(--font-family);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-16);
+  line-height: 1.2;
+}
+
+/* Desktop nav */
+.navDesktop {
   display: flex;
   align-items: center;
   gap: clamp(10px, 1.66vw, 24px);
@@ -47,32 +56,22 @@
   color: var(--color-text-hover);
 }
 
-.authActions {
+/* Desktop auth */
+.authDesktop {
   display: flex;
   gap: clamp(6px, 0.55vw, 8px);
   flex-shrink: 0;
 }
 
-.authBtn {
-  padding-inline: clamp(14px, 1.8vw, 26px);
-  border-radius: 999px;
-  border: 1px solid transparent;
-  font-weight: 600;
-  font-size: clamp(14px, 1.11vw, 16px);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-/* ghost */
+/* buttons (как у тебя) */
 .authBtnGhost {
   border: 1px solid rgba(251, 251, 251, 0.4);
   border-radius: 30px;
 
-  /* вместо фикс width + огромного padding */
   padding: clamp(12px, 1vw, 14px) clamp(16px, 2.7vw, 39px);
   min-height: clamp(40px, 3.33vw, 48px);
 
-  width: auto; /* ключ */
+  width: auto;
   min-width: clamp(96px, 9vw, 124px);
 
   font-family: var(--font-family);
@@ -86,13 +85,16 @@
   align-items: center;
   justify-content: center;
   white-space: nowrap;
+
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .authBtnGhost:hover {
   background: rgba(0, 0, 0, 0.25);
 }
 
-/* primary */
 .authBtnPrimary {
   background: var(--color-accent-primary);
   border-radius: 30px;
@@ -100,7 +102,7 @@
   padding: clamp(12px, 1vw, 14px) clamp(16px, 2.8vw, 40px);
   min-height: clamp(40px, 3.33vw, 48px);
 
-  width: auto; /* ключ */
+  width: auto;
   min-width: clamp(120px, 12vw, 168px);
 
   display: inline-flex;
@@ -113,6 +115,10 @@
   line-height: 1.2;
   letter-spacing: -0.01em;
   color: var(--color-text-inverse);
+  border: 1px solid transparent;
+
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .authBtnPrimary:hover {
@@ -120,20 +126,122 @@
   color: var(--color-text-hover);
 }
 
-.navContainer {
-  display: flex;
-  align-items: center;
-  gap: clamp(12px, 6.4vw, 92px);
-  min-width: 0;
+/* Burger hidden on desktop */
+.burger {
+  display: none;
+  border: 0;
+  background: transparent;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
-@media (max-width: 320px) {
-  .nav {
-    flex-wrap: wrap;
-    justify-content: flex-end;
+.burger:hover {
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.burgerBar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin: 4px 0;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Mobile menu overlay */
+.mobileMenu {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.mobileBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* Panel is above backdrop */
+.mobilePanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+
+  height: 100%;
+  width: min(86vw, 360px);
+
+  background: #fff;
+  padding: 18px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.25);
+}
+
+.mobileClose {
+  align-self: flex-end;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  color: rgba(17, 16, 28, 0.8);
+}
+
+.mobileClose:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.navMobile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobileLink {
+  font-family: var(--font-family);
+  font-weight: var(--fw-medium);
+  font-size: clamp(12px, 1.11vw, var(--fs-16));
+  line-height: 1.2;
+  letter-spacing: var(--ls-tight);
+
+  text-decoration: none;
+
+  /* на белом фоне делаем читаемым */
+  color: rgba(17, 16, 28, 0.9);
+
+  padding: 10px 10px;
+  border-radius: 12px;
+}
+
+.mobileLink:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.authMobile {
+  margin-top: auto;
+  display: grid;
+  gap: 10px;
+}
+
+/* Breakpoint 576 */
+@media (max-width: 576px) {
+  .navDesktop,
+  .authDesktop {
+    display: none;
   }
-  .navContainer {
-    flex-wrap: wrap;
-    justify-content: flex-end;
+
+  .burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 }

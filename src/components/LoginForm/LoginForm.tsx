@@ -39,7 +39,9 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
           className={css.iconBtn}
           aria-label="Toggle password visibility"
         >
-          👁
+          <svg className={css.ctaIcon} aria-hidden="true">
+            <use href="/vite.svg#icon-eye-off" />
+          </svg>
         </button>
       </div>
 
