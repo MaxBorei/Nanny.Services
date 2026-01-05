@@ -1,0 +1,96 @@
+.form {
+  display: grid;
+  gap: clamp(10px, 1.2vw, 14px);
+}
+
+.input {
+  width: 100%;
+  height: clamp(44px, 3.7vw, 54px);
+  padding-inline: clamp(12px, 1.4vw, 16px);
+  border-radius: 12px;
+  border: 1px solid rgba(17, 16, 28, 0.12);
+  background: #fff;
+  outline: none;
+  font-size: clamp(14px, 1.25vw, 16px);
+  color: #11101c;
+}
+
+.input::placeholder {
+  color: rgba(17, 16, 28, 0.45);
+}
+
+.input:focus {
+  border-color: rgba(17, 16, 28, 0.22);
+  box-shadow: 0 0 0 3px rgba(17, 16, 28, 0.06);
+}
+
+.submit {
+  height: clamp(46px, 3.9vw, 58px);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  background: #ff3b3b;
+  color: #fff;
+  font-size: clamp(14px, 1.25vw, 16px);
+  font-weight: 600;
+}
+
+.submit:hover {
+  filter: brightness(0.96);
+}
+
+.field {
+  position: relative;
+}
+
+.inputWithIcon {
+  padding-right: clamp(40px, 4.4vw, 56px);
+}
+
+.iconBtn {
+  position: absolute;
+  top: 50%;
+  right: clamp(10px, 1.2vw, 14px);
+  transform: translateY(-50%);
+  width: clamp(32px, 3.2vw, 42px);
+  height: clamp(32px, 3.2vw, 42px);
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  color: rgba(17, 16, 28, 0.55);
+  justify-content: center;
+}
+
+.iconBtn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.iconBtn {
+  position: absolute;
+  top: 50%;
+  right: clamp(10px, 1.2vw, 14px);
+  transform: translateY(-50%);
+  width: clamp(32px, 3.2vw, 42px);
+  height: clamp(32px, 3.2vw, 42px);
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  color: rgba(17, 16, 28, 0.55);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ctaIcon {
+  width: clamp(12px, 1vw, 20px);
+  height: clamp(12px, 1.1vw, 20px);
+  flex: 0 0 clamp(12px, 1.1vw, 20px);
+  display: block;
+
+  fill: var(--color-accent-inverse);
+  stroke: var(--color-text-third);
+  stroke-width: 2px;
+}

@@ -5,7 +5,7 @@
   border-radius: clamp(12px, 1.6vw, 24px);
   min-height: clamp(420px, 45vw, 648px);
 
-  overflow: hidden;
+  position: relative;
   background: transparent;
 }
 
@@ -159,7 +159,7 @@
   line-height: 1.2;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
   }

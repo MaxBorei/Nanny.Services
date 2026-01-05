@@ -1,10 +1,34 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import css from "./Header.module.css";
+
+import Modal from "../Modal/Modal";
+import { LoginForm } from "../LoginForm/LoginForm";
+import { RegisterForm } from "../RegisterForm/RegisterForm";
+
+type AuthMode = "login" | "register";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
 
-  // ESC closes
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<AuthMode>("login");
+
+  const closeAuth = () => setIsAuthOpen(false);
+
+  const openLogin = () => {
+    setAuthMode("login");
+    setIsAuthOpen(true);
+    setOpen(false);
+  };
+
+  const openRegister = () => {
+    setAuthMode("register");
+    setIsAuthOpen(true);
+    setOpen(false);
+  };
+
+  // ESC closes mobile menu
   useEffect(() => {
     if (!open) return;
 
@@ -26,6 +50,65 @@ export default function Header() {
     };
   }, [open]);
 
+  // handlers for forms
+  const handleLoginSubmit = (data: { email: string; password: string }) => {
+    console.log("LOGIN:", data);
+    closeAuth();
+  };
+
+  const handleRegisterSubmit = (data: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
+    console.log("REGISTER:", data);
+    closeAuth();
+  };
+
+  const mobileMenu = open ? (
+    <div className={css.mobileMenu} role="dialog" aria-modal="true">
+      <div className={css.mobileBackdrop} onClick={() => setOpen(false)} />
+
+      <div className={css.mobilePanel}>
+        <button
+          type="button"
+          className={css.mobileClose}
+          aria-label="Close menu"
+          onClick={() => setOpen(false)}
+        >
+          ✕
+        </button>
+
+        <nav className={css.navMobile} aria-label="Mobile">
+          <a className={css.mobileLink} href="#" onClick={() => setOpen(false)}>
+            Home
+          </a>
+          <a className={css.mobileLink} href="#" onClick={() => setOpen(false)}>
+            Nannies
+          </a>
+        </nav>
+
+        <div className={css.authMobile}>
+          <button
+            className={css.authBtnGhost}
+            type="button"
+            onClick={openLogin}
+          >
+            Log In
+          </button>
+
+          <button
+            className={css.authBtnPrimary}
+            type="button"
+            onClick={openRegister}
+          >
+            Registration
+          </button>
+        </div>
+      </div>
+    </div>
+  ) : null;
+
   return (
     <header className={css.header}>
       <div className={css.inner}>
@@ -34,23 +117,34 @@ export default function Header() {
         </a>
 
         {/* Desktop nav */}
-        <nav className={css.navDesktop} aria-label="Primary">
-          <a className={css.navLink} href="#">
-            Home
-          </a>
-          <a className={css.navLink} href="#">
-            Nannies
-          </a>
-        </nav>
+        <div className={css.navContainer}>
+          <nav className={css.navDesktop} aria-label="Primary">
+            <a className={css.navLink} href="#">
+              Home
+            </a>
+            <a className={css.navLink} href="#">
+              Nannies
+            </a>
+          </nav>
 
-        {/* Desktop auth */}
-        <div className={css.authDesktop}>
-          <button className={css.authBtnGhost} type="button">
-            Log In
-          </button>
-          <button className={css.authBtnPrimary} type="button">
-            Registration
-          </button>
+          {/* Desktop auth */}
+          <div className={css.authDesktop}>
+            <button
+              className={css.authBtnGhost}
+              type="button"
+              onClick={openLogin}
+            >
+              Log In
+            </button>
+
+            <button
+              className={css.authBtnPrimary}
+              type="button"
+              onClick={openRegister}
+            >
+              Registration
+            </button>
+          </div>
         </div>
 
         {/* Burger button (mobile) */}
@@ -67,50 +161,26 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile menu */}
-      {open && (
-        <div className={css.mobileMenu} role="dialog" aria-modal="true">
-          {/* backdrop FIRST so it doesn't cover the panel */}
-          <div className={css.mobileBackdrop} onClick={() => setOpen(false)} />
+      {/* Mobile menu via Portal */}
+      {open && createPortal(mobileMenu, document.body)}
 
-          <div className={css.mobilePanel}>
-            <button
-              type="button"
-              className={css.mobileClose}
-              aria-label="Close menu"
-              onClick={() => setOpen(false)}
-            >
-              ✕
-            </button>
-
-            <nav className={css.navMobile} aria-label="Mobile">
-              <a
-                className={css.mobileLink}
-                href="#"
-                onClick={() => setOpen(false)}
-              >
-                Home
-              </a>
-              <a
-                className={css.mobileLink}
-                href="#"
-                onClick={() => setOpen(false)}
-              >
-                Nannies
-              </a>
-            </nav>
-
-            <div className={css.authMobile}>
-              <button className={css.authBtnGhost} type="button">
-                Log In
-              </button>
-              <button className={css.authBtnPrimary} type="button">
-                Registration
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Auth modal */}
+      <Modal
+        isOpen={isAuthOpen}
+        onClose={closeAuth}
+        title={authMode === "login" ? "Log In" : "Registration"}
+        description={
+          authMode === "login"
+            ? "Enter your email and password."
+            : "Fill the form to create an account."
+        }
+      >
+        {authMode === "login" ? (
+          <LoginForm onSubmit={handleLoginSubmit} />
+        ) : (
+          <RegisterForm onSubmit={handleRegisterSubmit} />
+        )}
+      </Modal>
     </header>
   );
 }

@@ -29,6 +29,11 @@
 }
 
 /* Desktop nav */
+.navContainer {
+  display: flex;
+  gap: clamp(18px, 6.3vw, 92px);
+}
+
 .navDesktop {
   display: flex;
   align-items: center;
@@ -37,7 +42,6 @@
 }
 
 .navLink {
-  position: relative;
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
 
@@ -63,7 +67,7 @@
   flex-shrink: 0;
 }
 
-/* buttons (как у тебя) */
+/* buttons */
 .authBtnGhost {
   border: 1px solid rgba(251, 251, 251, 0.4);
   border-radius: 30px;
@@ -154,7 +158,7 @@
 .mobileMenu {
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 20000;
 }
 
 .mobileBackdrop {
@@ -168,7 +172,6 @@
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 1;
 
   height: 100%;
   width: min(86vw, 360px);
@@ -214,8 +217,6 @@
   letter-spacing: var(--ls-tight);
 
   text-decoration: none;
-
-  /* на белом фоне делаем читаемым */
   color: rgba(17, 16, 28, 0.9);
 
   padding: 10px 10px;
@@ -232,8 +233,8 @@
   gap: 10px;
 }
 
-/* Breakpoint 576 */
-@media (max-width: 576px) {
+/* Breakpoint 900 */
+@media (max-width: 900px) {
   .navDesktop,
   .authDesktop {
     display: none;
@@ -241,7 +242,9 @@
 
   .burger {
     display: inline-flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1px;
   }
 }

@@ -1,3 +1,5 @@
+import css from "./RegisterForm.module.css";
+
 type RegisterFormProps = {
   onSubmit: (data: { name: string; email: string; password: string }) => void;
 };
@@ -15,11 +17,45 @@ export function RegisterForm({ onSubmit }: RegisterFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="name" type="text" placeholder="Name" required />
-      <input name="email" type="email" placeholder="Email" required />
-      <input name="password" type="password" placeholder="Password" required />
-      <button type="submit">Create account</button>
+    <form className={css.form} onSubmit={handleSubmit}>
+      <input
+        className={css.input}
+        name="name"
+        type="text"
+        placeholder="Name"
+        required
+      />
+
+      <input
+        className={css.input}
+        name="email"
+        type="email"
+        placeholder="Email"
+        required
+      />
+
+      <div className={css.field}>
+        <input
+          className={`${css.input} ${css.inputWithIcon}`}
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
+        <button
+          type="button"
+          className={css.iconBtn}
+          aria-label="Toggle password visibility"
+        >
+          <svg className={css.ctaIcon} aria-hidden="true">
+            <use href="/vite.svg#icon-eye-off" />
+          </svg>
+        </button>
+      </div>
+
+      <button className={css.submit} type="submit">
+        Create account
+      </button>
     </form>
   );
 }
