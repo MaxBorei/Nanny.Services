@@ -76,7 +76,9 @@ export default function Header() {
           aria-label="Close menu"
           onClick={() => setOpen(false)}
         >
-          ✕
+          <svg className={css.closeIcon} aria-hidden="true">
+            <use href="/vite.svg#icon-close" />
+          </svg>
         </button>
 
         <nav className={css.navMobile} aria-label="Mobile">
@@ -119,10 +121,10 @@ export default function Header() {
         {/* Desktop nav */}
         <div className={css.navContainer}>
           <nav className={css.navDesktop} aria-label="Primary">
-            <a className={css.navLink} href="#">
+            <a className={css.navLink} href="/">
               Home
             </a>
-            <a className={css.navLink} href="#">
+            <a className={css.navLink} href="/Nannies">
               Nannies
             </a>
           </nav>
@@ -171,8 +173,8 @@ export default function Header() {
         title={authMode === "login" ? "Log In" : "Registration"}
         description={
           authMode === "login"
-            ? "Enter your email and password."
-            : "Fill the form to create an account."
+            ? "Welcome back! Please enter your credentials to access your account and continue your babysitter search."
+            : "Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information."
         }
       >
         {authMode === "login" ? (

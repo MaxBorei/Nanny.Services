@@ -1,10 +1,12 @@
 import css from "./RegisterForm.module.css";
+import { useState } from "react";
 
 type RegisterFormProps = {
   onSubmit: (data: { name: string; email: string; password: string }) => void;
 };
 
 export function RegisterForm({ onSubmit }: RegisterFormProps) {
+  const [showPassword, setShowPassword] = useState(false);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -17,44 +19,48 @@ export function RegisterForm({ onSubmit }: RegisterFormProps) {
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
-      <input
-        className={css.input}
-        name="name"
-        type="text"
-        placeholder="Name"
-        required
-      />
-
-      <input
-        className={css.input}
-        name="email"
-        type="email"
-        placeholder="Email"
-        required
-      />
-
-      <div className={css.field}>
+    <form onSubmit={handleSubmit}>
+      <div className={css.form}>
         <input
-          className={`${css.input} ${css.inputWithIcon}`}
-          name="password"
-          type="password"
-          placeholder="Password"
+          className={css.input}
+          name="name"
+          type="text"
+          placeholder="Name"
           required
         />
-        <button
-          type="button"
-          className={css.iconBtn}
-          aria-label="Toggle password visibility"
-        >
-          <svg className={css.ctaIcon} aria-hidden="true">
-            <use href="/vite.svg#icon-eye-off" />
-          </svg>
-        </button>
+        <input
+          className={css.input}
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+        />
+        <div className={css.field}>
+          <input
+            className={`${css.input} ${css.inputWithIcon}`}
+            name="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            required
+          />
+
+          <button
+            type="button"
+            className={css.iconBtn}
+            aria-label={showPassword ? "Hide password" : "Show password"}
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            <svg className={css.ctaIcon} aria-hidden="true">
+              <use
+                href={`/vite.svg#icon-${showPassword ? "eye" : "eye-off"}`}
+              />
+            </svg>
+          </button>
+        </div>
       </div>
 
       <button className={css.submit} type="submit">
-        Create account
+        Sign Up
       </button>
     </form>
   );

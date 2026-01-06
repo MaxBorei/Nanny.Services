@@ -188,19 +188,27 @@
 
 .mobileClose {
   align-self: flex-end;
-  width: 40px;
-  height: 40px;
-  border: 0;
-  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
   background: transparent;
-  cursor: pointer;
-  font-size: 20px;
+  font-size: var(--fs-20);
   line-height: 1;
   color: rgba(17, 16, 28, 0.8);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mobileClose:hover {
   background: rgba(0, 0, 0, 0.06);
+}
+
+.closeIcon {
+  stroke-width: 2.5px;
+  stroke: var(--color-text-third);
+  width: 32px;
+  height: 32px;
 }
 
 .navMobile {
