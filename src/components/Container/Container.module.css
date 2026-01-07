@@ -3,5 +3,5 @@
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
-  padding-inline: clamp(16px, 2.22vw, 32px);
+  padding-inline: var(--fluid-container-pad);
 }

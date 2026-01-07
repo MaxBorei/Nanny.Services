@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 
-  border-radius: clamp(12px, 1.6vw, 24px);
+  border-radius: var(--radius-16);
   min-height: clamp(420px, 45vw, 648px);
 
   position: relative;
@@ -25,7 +25,7 @@
   letter-spacing: var(--ls-tighter);
   color: var(--color-text-inverse);
 
-  margin-bottom: clamp(12px, 1.94vw, 28px);
+  margin-bottom: var(--fluid-hero-gap);
 }
 
 .subtitle {
@@ -37,22 +37,22 @@
   letter-spacing: var(--ls-tight);
   color: var(--color-text-inverse);
 
-  margin-bottom: clamp(20px, 4.44vw, 64px);
+  margin-bottom: clamp(var(--sp-20), 4.44vw, 64px);
 }
 
 .cta {
   width: clamp(200px, 16vw, 231px);
-  min-height: clamp(48px, 4.2vw, 60px);
+  min-height: clamp(var(--btn-height-md), 4.2vw, 60px);
 
   display: inline-flex;
   align-items: center;
-  gap: clamp(10px, 1.25vw, 18px);
+  gap: clamp(var(--sp-8), 1.25vw, var(--sp-20));
 
   border: 1px solid rgba(251, 251, 251, 0.4);
   border-radius: var(--radius-30);
 
-  padding-block: clamp(14px, 1.25vw, 18px);
-  padding-inline: clamp(18px, 3.47vw, 50px);
+  padding-block: clamp(var(--sp-12), 1.25vw, var(--sp-20));
+  padding-inline: clamp(var(--sp-16), 3.47vw, 50px);
 
   background: transparent;
   color: var(--color-text-inverse);
@@ -71,7 +71,7 @@
 .cta:hover .ctaIcon {
   transform: rotate(55deg);
   transform-origin: center;
-  transition: transform 0.2s ease;
+  transition: transform var(--transition-base);
 }
 
 .ctaIcon {
@@ -79,9 +79,9 @@
   stroke-width: 2px;
   transform: rotate(0deg);
 
-  width: clamp(12px, 1vw, 14px);
-  height: clamp(12px, 1.1vw, 16px);
-  flex: 0 0 clamp(12px, 1.1vw, 16px);
+  width: clamp(var(--sp-12), 1vw, var(--sp-16));
+  height: clamp(var(--sp-12), 1.1vw, var(--sp-16));
+  flex: 0 0 clamp(var(--sp-12), 1.1vw, var(--sp-16));
 
   display: block;
 }
@@ -101,15 +101,15 @@
   height: auto;
 
   position: absolute;
-  right: clamp(12px, 3.47vw, 50px);
-  bottom: clamp(12px, 3.47vw, 50px);
+  right: var(--fluid-badge-offset);
+  bottom: var(--fluid-badge-offset);
 
   display: flex;
   align-items: center;
-  gap: clamp(10px, 1.11vw, 16px);
+  gap: clamp(var(--sp-8), 1.11vw, var(--sp-16));
 
-  padding: clamp(14px, 2.22vw, 32px);
-  border-radius: clamp(12px, 1.11vw, 16px);
+  padding: var(--fluid-badge-pad);
+  border-radius: clamp(var(--radius-12), 1.11vw, var(--radius-16));
 
   background: rgba(255, 255, 255, 0.92);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
@@ -124,10 +124,10 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: clamp(8px, 0.83vw, 12px);
+  border-radius: clamp(var(--radius-8), 0.83vw, var(--radius-12));
   background: var(--color-accent-red);
-  color: #fff;
-  font-weight: 700;
+  color: var(--color-text-inverse);
+  font-weight: var(--fw-bold);
 }
 
 .badgeIconSvg {
@@ -137,7 +137,7 @@
 .badgeText {
   display: flex;
   flex-direction: column;
-  gap: clamp(4px, 0.41vw, 6px);
+  gap: clamp(var(--sp-4), 0.41vw, var(--sp-8));
 }
 
 .badgeLabel {
@@ -174,13 +174,13 @@
 
   .title {
     font-size: var(--fs-16);
-    margin-bottom: 12px;
+    margin-bottom: var(--sp-12);
   }
 
   .subtitle {
-    font-size: 12px;
+    font-size: var(--fs-12);
     line-height: 1.2;
-    margin-bottom: 24px;
+    margin-bottom: var(--sp-24);
   }
 
   .left {
@@ -188,7 +188,7 @@
     height: auto;
     margin-left: 0;
     margin-top: 0;
-    padding: 16px;
+    padding: var(--sp-16);
   }
 
   .right {

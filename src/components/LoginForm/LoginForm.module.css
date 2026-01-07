@@ -1,29 +1,29 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: clamp(10px, 1.2vw, 18px);
-  margin-bottom: 40px;
+  gap: clamp(var(--sp-8), 1.2vw, var(--sp-20));
+  margin-bottom: var(--sp-40);
 }
 
 .input {
   width: 100%;
   height: clamp(44px, 3.7vw, 54px);
-  padding-inline: clamp(12px, 1.4vw, 16px);
-  border-radius: 12px;
-  border: 1px solid rgba(17, 16, 28, 0.12);
+  padding-inline: clamp(var(--sp-12), 1.4vw, var(--sp-16));
+  border-radius: var(--radius-12);
+  border: 1px solid var(--color-border-light);
   background: var(--color-bg-inverse);
   outline: none;
 }
 
 .input::placeholder {
-  font-size: clamp(14px, 1.25vw, 16px);
+  font-size: clamp(var(--fs-14), 1.25vw, var(--fs-16));
   font-weight: var(--fw-regular);
   color: var(--color-text-third);
   line-height: 1.25;
 }
 
 .input:focus {
-  border-color: rgba(17, 16, 28, 0.22);
+  border-color: var(--color-border-medium);
   box-shadow: 0 0 0 3px rgba(17, 16, 28, 0.06);
 }
 
@@ -32,18 +32,18 @@
 }
 
 .inputWithIcon {
-  padding-right: clamp(40px, 4.4vw, 56px);
+  padding-right: clamp(var(--sp-40), 4.4vw, 56px);
 }
 
 .iconBtn {
   position: absolute;
   top: 50%;
-  right: clamp(10px, 1.2vw, 14px);
+  right: clamp(var(--sp-8), 1.2vw, var(--sp-16));
   transform: translateY(-50%);
   width: clamp(32px, 3.2vw, 42px);
   height: clamp(32px, 3.2vw, 42px);
   border: 0;
-  border-radius: 10px;
+  border-radius: var(--radius-12);
   background: transparent;
   cursor: pointer;
   color: rgba(17, 16, 28, 0.55);
@@ -57,11 +57,11 @@
 .submit {
   height: clamp(46px, 3.9vw, 58px);
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
   background: var(--color-accent-primary);
   color: var(--color-accent-inverse);
-  font-size: clamp(14px, 1.25vw, 16px);
+  font-size: clamp(var(--fs-14), 1.25vw, var(--fs-16));
   font-weight: var(--fw-medium);
   width: 100%;
   line-height: 1.25;
@@ -73,9 +73,9 @@
 }
 
 .ctaIcon {
-  width: clamp(12px, 1vw, 20px);
-  height: clamp(12px, 1.1vw, 20px);
-  flex: 0 0 clamp(12px, 1.1vw, 20px);
+  width: clamp(var(--sp-12), 1vw, var(--sp-20));
+  height: clamp(var(--sp-12), 1.1vw, var(--sp-20));
+  flex: 0 0 clamp(var(--sp-12), 1.1vw, var(--sp-20));
   display: block;
 
   fill: var(--color-accent-inverse);

@@ -1,7 +1,7 @@
 .header {
   background: transparent;
-  padding-block: clamp(14px, 1.39vw, 20px);
-  padding-inline: clamp(16px, 6.66vw, 96px);
+  padding-block: var(--fluid-header-pad-y);
+  padding-inline: var(--fluid-header-pad-x);
   border-bottom: 1px solid rgba(251, 251, 251, 0.4);
 }
 
@@ -13,8 +13,8 @@
   width: 100%;
   max-width: 1184px;
 
-  gap: clamp(12px, 2.5vw, 32px);
-  min-height: 48px;
+  gap: var(--fluid-inner-gap);
+  min-height: var(--btn-height-md);
 
   margin: 0 auto;
 }
@@ -28,16 +28,15 @@
   line-height: 1.2;
 }
 
-/* Desktop nav */
 .navContainer {
   display: flex;
-  gap: clamp(18px, 6.3vw, 92px);
+  gap: var(--fluid-navcontainer-gap);
 }
 
 .navDesktop {
   display: flex;
   align-items: center;
-  gap: clamp(10px, 1.66vw, 24px);
+  gap: var(--fluid-nav-gap);
   min-width: 0;
 }
 
@@ -45,14 +44,14 @@
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
 
-  font-size: clamp(12px, 1.11vw, var(--fs-16));
+  font-size: clamp(var(--fs-12), 1.11vw, var(--fs-16));
   line-height: 1.2;
 
   letter-spacing: var(--ls-tight);
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
 
-  padding: clamp(4px, 0.42vw, 6px) 2px;
+  padding: clamp(var(--sp-4), 0.42vw, var(--sp-8)) 2px;
   transition: color var(--transition-base);
 }
 
@@ -60,29 +59,28 @@
   color: var(--color-text-hover);
 }
 
-/* Desktop auth */
 .authDesktop {
   display: flex;
-  gap: clamp(6px, 0.55vw, 8px);
+  gap: var(--sp-8);
   flex-shrink: 0;
 }
 
-/* buttons */
 .authBtnGhost {
   border: 1px solid rgba(251, 251, 251, 0.4);
-  border-radius: 30px;
+  border-radius: var(--radius-30);
 
-  padding: clamp(12px, 1vw, 14px) clamp(16px, 2.7vw, 39px);
-  min-height: clamp(40px, 3.33vw, 48px);
+  padding: clamp(var(--sp-12), 1vw, var(--sp-16))
+    clamp(var(--sp-16), 2.7vw, var(--sp-40));
+  min-height: var(--btn-height-sm);
 
   width: auto;
   min-width: clamp(96px, 9vw, 124px);
 
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
-  font-size: clamp(12px, 1.11vw, var(--fs-16));
+  font-size: clamp(var(--fs-12), 1.11vw, var(--fs-16));
   line-height: 1;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--ls-ltight);
   color: var(--color-text-inverse);
 
   display: inline-flex;
@@ -92,7 +90,7 @@
 
   background: transparent;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all var(--transition-fast);
 }
 
 .authBtnGhost:hover {
@@ -101,10 +99,11 @@
 
 .authBtnPrimary {
   background: var(--color-accent-primary);
-  border-radius: 30px;
+  border-radius: var(--radius-30);
 
-  padding: clamp(12px, 1vw, 14px) clamp(16px, 2.8vw, 40px);
-  min-height: clamp(40px, 3.33vw, 48px);
+  padding: clamp(var(--sp-12), 1vw, var(--sp-16))
+    clamp(var(--sp-16), 2.8vw, var(--sp-40));
+  min-height: var(--btn-height-sm);
 
   width: auto;
   min-width: clamp(120px, 12vw, 168px);
@@ -115,14 +114,14 @@
 
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
-  font-size: clamp(12px, 1.11vw, var(--fs-16));
+  font-size: clamp(var(--fs-12), 1.11vw, var(--fs-16));
   line-height: 1.2;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--ls-ltight);
   color: var(--color-text-inverse);
   border: 1px solid transparent;
 
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all var(--transition-fast);
 }
 
 .authBtnPrimary:hover {
@@ -130,13 +129,12 @@
   color: var(--color-text-hover);
 }
 
-/* Burger hidden on desktop */
 .burger {
   display: none;
   border: 0;
   background: transparent;
-  padding: 8px;
-  border-radius: 10px;
+  padding: var(--sp-8);
+  border-radius: var(--radius-12);
   cursor: pointer;
   flex-shrink: 0;
 }
@@ -154,7 +152,6 @@
   background: rgba(255, 255, 255, 0.9);
 }
 
-/* Mobile menu overlay */
 .mobileMenu {
   position: fixed;
   inset: 0;
@@ -167,7 +164,6 @@
   background: rgba(0, 0, 0, 0.45);
 }
 
-/* Panel is above backdrop */
 .mobilePanel {
   position: absolute;
   top: 0;
@@ -176,12 +172,12 @@
   height: 100%;
   width: min(86vw, 360px);
 
-  background: #fff;
-  padding: 18px;
+  background: var(--color-bg-primary);
+  padding: var(--sp-20);
 
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--sp-20);
 
   box-shadow: -12px 0 40px rgba(0, 0, 0, 0.25);
 }
@@ -214,21 +210,21 @@
 .navMobile {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--sp-12);
 }
 
 .mobileLink {
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
-  font-size: clamp(12px, 1.11vw, var(--fs-16));
+  font-size: clamp(var(--fs-12), 1.11vw, var(--fs-16));
   line-height: 1.2;
   letter-spacing: var(--ls-tight);
 
   text-decoration: none;
   color: rgba(17, 16, 28, 0.9);
 
-  padding: 10px 10px;
-  border-radius: 12px;
+  padding: var(--sp-12);
+  border-radius: var(--radius-12);
 }
 
 .mobileLink:hover {
@@ -236,12 +232,10 @@
 }
 
 .authMobile {
-  margin-top: auto;
-  display: grid;
-  gap: 10px;
+  display: flex;
+  gap: var(--sp-8);
 }
 
-/* Breakpoint 900 */
 @media (max-width: 900px) {
   .navDesktop,
   .authDesktop {
@@ -254,5 +248,14 @@
     align-items: center;
     justify-content: center;
     gap: 1px;
+  }
+
+  .authBtnGhost {
+    background: var(--color-accent-primary);
+  }
+
+  .authMobile {
+    gap: var(--sp-4);
+    justify-content: space-evenly;
   }
 }

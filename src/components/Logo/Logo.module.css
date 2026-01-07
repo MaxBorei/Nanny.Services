@@ -1,5 +1,5 @@
 .logo {
-  width: clamp(120px, 11.4vw, 164px);
+  width: var(--fluid-logo-120-164);
   height: auto;
 }
 
@@ -7,7 +7,7 @@
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
 
-  font-size: clamp(14px, 1.66vw, var(--fs-24));
+  font-size: clamp(var(--fs-14), 1.66vw, var(--fs-24));
   line-height: 1.25;
 
   letter-spacing: var(--ls-tight);
