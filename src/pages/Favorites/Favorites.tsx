@@ -1,3 +1,5 @@
+import Header from "../../components/Header/Header";
+
 export default function Favorites() {
-  return <h1>Улюблене</h1>;
+  return <Header variant="solid" />;
 }

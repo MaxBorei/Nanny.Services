@@ -1,8 +1,15 @@
 .header {
-  background: transparent;
   padding-block: var(--fluid-header-pad-y);
   padding-inline: var(--fluid-header-pad-x);
   border-bottom: 1px solid rgba(251, 251, 251, 0.4);
+}
+
+.transparent {
+  background: transparent;
+}
+
+.solid {
+  background: var(--color-accent-primary);
 }
 
 .inner {
@@ -53,10 +60,26 @@
 
   padding: clamp(var(--sp-4), 0.42vw, var(--sp-8)) 2px;
   transition: color var(--transition-base);
+  position: relative;
+  text-decoration: none;
 }
 
 .navLink:hover {
   color: var(--color-text-hover);
+}
+
+.navLink[data-active="true"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+
+  background: var(--color-bg-inverse);
+  transform: translateX(-50%);
 }
 
 .authDesktop {

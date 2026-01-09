@@ -101,8 +101,8 @@
   height: auto;
 
   position: absolute;
-  right: var(--fluid-badge-offset);
-  bottom: var(--fluid-badge-offset);
+  right: clamp(var(--fluid-badge-offset), 3.5vw, 50px);
+  bottom: clamp(var(--fluid-badge-offset), 3.5vw, 50px);
 
   display: flex;
   align-items: center;

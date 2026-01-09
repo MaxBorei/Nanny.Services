@@ -1,3 +1,5 @@
+import Header from "../../components/Header/Header";
+
 export default function Nannies() {
-  return <h1>Няні</h1>;
+  return <Header variant="solid" />;
 }

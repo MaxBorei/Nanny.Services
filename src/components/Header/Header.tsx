@@ -8,7 +8,11 @@ import { RegisterForm } from "../RegisterForm/RegisterForm";
 
 type AuthMode = "login" | "register";
 
-export default function Header() {
+type HeaderProps = {
+  variant?: "transparent" | "solid";
+};
+
+export default function Header({ variant = "transparent" }: HeaderProps) {
   const [open, setOpen] = useState(false);
 
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -111,8 +115,18 @@ export default function Header() {
     </div>
   ) : null;
 
+  const pathname = window.location.pathname;
+
+  // const isHome = pathname === "/";
+  const isNannies = pathname === "/nannies" || pathname.startsWith("/nannies/");
+  const isFavorites =
+    pathname === "/favorites" || pathname.startsWith("/favorites/");
+
+  // Favorites виден на Nannies и Favorites
+  const showFavorites = isNannies || isFavorites;
+
   return (
-    <header className={css.header}>
+    <header className={`${css.header} ${css[variant]}`}>
       <div className={css.inner}>
         <a className={css.logo} href="/">
           Nanny.Services
@@ -124,9 +138,24 @@ export default function Header() {
             <a className={css.navLink} href="/">
               Home
             </a>
-            <a className={css.navLink} href="/Nannies">
+
+            <a
+              className={css.navLink}
+              href="/nannies"
+              data-active={isNannies ? "true" : undefined}
+            >
               Nannies
             </a>
+
+            {showFavorites && (
+              <a
+                className={css.navLink}
+                href="/favorites"
+                data-active={isFavorites ? "true" : undefined}
+              >
+                Favorites
+              </a>
+            )}
           </nav>
 
           {/* Desktop auth */}
