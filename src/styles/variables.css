@@ -199,6 +199,16 @@
     16px + (32 - 16) * ((100vw - 320px) / var(--vw-range))
   );
 
+  /* NAVIGATION */
+  --nav-link-color-light: var(--color-bg-inverse);
+  --nav-link-hover-light: var(--color-text-hover);
+
+  --nav-link-color-on-accent: var(--color-bg-inverse);
+  --nav-link-hover-on-accent: var(--color-text-secondary);
+
+  --nav-link-dot-light: var(--color-bg-inverse);
+  --nav-link-dot-on-accent: var(--color-text-secondary);
+
   @media (max-width: 320px) {
     :root {
       --fluid-fs-18-24: 18px;

@@ -2,14 +2,23 @@
   padding-block: var(--fluid-header-pad-y);
   padding-inline: var(--fluid-header-pad-x);
   border-bottom: 1px solid rgba(251, 251, 251, 0.4);
+  --nav-link-color: var(--nav-link-color-light);
+  --nav-link-hover: var(--nav-link-hover-light);
+  --nav-link-dot: var(--nav-link-dot-light);
 }
 
 .transparent {
   background: transparent;
+  --nav-link-color: var(--nav-link-color-light);
+  --nav-link-hover: var(--nav-link-hover-light);
+  --nav-link-dot: var(--nav-link-dot-light);
 }
 
 .solid {
   background: var(--color-accent-primary);
+  --nav-link-color: var(--nav-link-color-on-accent);
+  --nav-link-hover: var(--nav-link-hover-on-accent);
+  --nav-link-dot: var(--nav-link-dot-on-accent);
 }
 
 .inner {
@@ -55,17 +64,17 @@
   line-height: 1.2;
 
   letter-spacing: var(--ls-tight);
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--nav-link-color);
+  transition: color var(--transition-base);
   text-decoration: none;
 
   padding: clamp(var(--sp-4), 0.42vw, var(--sp-8)) 2px;
-  transition: color var(--transition-base);
   position: relative;
   text-decoration: none;
 }
 
 .navLink:hover {
-  color: var(--color-text-hover);
+  color: var(--nav-link-hover);
 }
 
 .navLink[data-active="true"]::after {
