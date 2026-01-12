@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
+import { FirebaseError } from "firebase/app";
 import css from "./Header.module.css";
 
 import Modal from "../Modal/Modal";
 import { LoginForm } from "../LoginForm/LoginForm";
 import { RegisterForm } from "../RegisterForm/RegisterForm";
+
+import { loginUser, registerUser } from "../../lib/authApi";
 
 type AuthMode = "login" | "register";
 
@@ -12,22 +16,62 @@ type HeaderProps = {
   variant?: "transparent" | "solid";
 };
 
+type LoginData = { email: string; password: string };
+type RegisterData = { name: string; email: string; password: string };
+
+function getAuthErrorMessage(err: unknown): string {
+  if (err instanceof FirebaseError) {
+    switch (err.code) {
+      case "auth/email-already-in-use":
+        return "Ця пошта вже зареєстрована.";
+      case "auth/weak-password":
+        return "Пароль занадто простий (мінімум 6 символів).";
+      case "auth/invalid-email":
+        return "Некоректна пошта.";
+      case "auth/user-not-found":
+      case "auth/wrong-password":
+      case "auth/invalid-credential":
+        return "Невірна пошта або пароль.";
+      case "auth/too-many-requests":
+        return "Забагато спроб. Спробуй пізніше.";
+      case "auth/operation-not-allowed":
+        return "Email/Password метод вимкнений у Firebase.";
+      default:
+        return err.message || "Помилка авторизації.";
+    }
+  }
+
+  if (err instanceof Error) return err.message;
+  return "Невідома помилка.";
+}
+
 export default function Header({ variant = "transparent" }: HeaderProps) {
+  const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
 
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState<AuthMode>("login");
 
-  const closeAuth = () => setIsAuthOpen(false);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const closeAuth = () => {
+    setIsAuthOpen(false);
+    setAuthError(null);
+    setIsSubmitting(false);
+  };
 
   const openLogin = () => {
     setAuthMode("login");
+    setAuthError(null);
     setIsAuthOpen(true);
     setOpen(false);
   };
 
   const openRegister = () => {
     setAuthMode("register");
+    setAuthError(null);
     setIsAuthOpen(true);
     setOpen(false);
   };
@@ -55,18 +99,30 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
   }, [open]);
 
   // handlers for forms
-  const handleLoginSubmit = (data: { email: string; password: string }) => {
-    console.log("LOGIN:", data);
-    closeAuth();
+  const handleLoginSubmit = async (data: LoginData) => {
+    setAuthError(null);
+    setIsSubmitting(true);
+    try {
+      await loginUser(data);
+      closeAuth();
+      navigate("/nannies", { replace: true });
+    } catch (err: unknown) {
+      setAuthError(getAuthErrorMessage(err));
+      setIsSubmitting(false);
+    }
   };
 
-  const handleRegisterSubmit = (data: {
-    name: string;
-    email: string;
-    password: string;
-  }) => {
-    console.log("REGISTER:", data);
-    closeAuth();
+  const handleRegisterSubmit = async (data: RegisterData) => {
+    setAuthError(null);
+    setIsSubmitting(true);
+    try {
+      await registerUser(data);
+      closeAuth();
+      navigate("/nannies", { replace: true });
+    } catch (err: unknown) {
+      setAuthError(getAuthErrorMessage(err));
+      setIsSubmitting(false);
+    }
   };
 
   const mobileMenu = open ? (
@@ -116,13 +172,9 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
   ) : null;
 
   const pathname = window.location.pathname;
-
-  // const isHome = pathname === "/";
   const isNannies = pathname === "/nannies" || pathname.startsWith("/nannies/");
   const isFavorites =
     pathname === "/favorites" || pathname.startsWith("/favorites/");
-
-  // Favorites виден на Nannies и Favorites
   const showFavorites = isNannies || isFavorites;
 
   return (
@@ -132,7 +184,6 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
           Nanny.Services
         </a>
 
-        {/* Desktop nav */}
         <div className={css.navContainer}>
           <nav className={css.navDesktop} aria-label="Primary">
             <a className={css.navLink} href="/">
@@ -158,7 +209,6 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
             )}
           </nav>
 
-          {/* Desktop auth */}
           <div className={css.authDesktop}>
             <button
               className={css.authBtnGhost}
@@ -178,7 +228,6 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
           </div>
         </div>
 
-        {/* Burger button (mobile) */}
         <button
           type="button"
           className={css.burger}
@@ -192,10 +241,8 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
         </button>
       </div>
 
-      {/* Mobile menu via Portal */}
       {open && createPortal(mobileMenu, document.body)}
 
-      {/* Auth modal */}
       <Modal
         isOpen={isAuthOpen}
         onClose={closeAuth}
@@ -206,6 +253,14 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
             : "Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information."
         }
       >
+        {/* повідомлення помилки */}
+        {authError && (
+          <p style={{ color: "crimson", marginBottom: 12 }}>{authError}</p>
+        )}
+
+        {/* опційно: простий індикатор */}
+        {isSubmitting && <p style={{ marginBottom: 12 }}>Loading...</p>}
+
         {authMode === "login" ? (
           <LoginForm onSubmit={handleLoginSubmit} />
         ) : (
