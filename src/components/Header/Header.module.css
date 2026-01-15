@@ -268,6 +268,132 @@
   gap: var(--sp-8);
 }
 
+/* ===== Auth user bar (icon + name + logout) ===== */
+
+.userBar {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(var(--sp-8), 1vw, var(--sp-16));
+  flex-shrink: 0;
+  min-width: 0; /* щоб ім'я могло обрізатись */
+}
+
+.userIcon {
+  width: clamp(38px, 3.2vw, 44px);
+  height: clamp(38px, 3.2vw, 44px);
+  border-radius: clamp(var(--radius-12), 1.2vw, var(--radius-16));
+  background: var(--color-bg-primary);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+/* svg-іконка */
+.userIconSvg {
+  width: clamp(18px, 1.6vw, 22px);
+  height: clamp(18px, 1.6vw, 22px);
+  fill: var(--color-accent-primary);
+}
+
+/* ім’я */
+.userName {
+  font-family: var(--font-family);
+  font-weight: var(--fw-medium);
+  font-size: clamp(var(--fs-12), 1.11vw, var(--fs-16));
+  line-height: 1.2;
+  letter-spacing: var(--ls-tight);
+  color: var(--color-text-inverse);
+
+  max-width: clamp(90px, 10vw, 160px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* кнопка Log out в стилі ghost */
+.logoutBtn {
+  border: 1px solid rgba(251, 251, 251, 0.4);
+  border-radius: var(--radius-30);
+
+  padding: clamp(var(--sp-12), 1vw, var(--sp-16))
+    clamp(var(--sp-16), 2.7vw, var(--sp-40));
+
+  min-height: var(--btn-height-sm);
+  min-width: clamp(120px, 12vw, 134px);
+
+  font-family: var(--font-family);
+  font-weight: var(--fw-medium);
+  font-size: clamp(var(--fs-12), 1.11vw, var(--fs-16));
+  line-height: 1;
+  letter-spacing: var(--ls-ltight);
+  color: var(--color-text-inverse);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.logoutBtn:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.userBarMobile {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(var(--sp-8), 2.2vw, var(--sp-16));
+  padding: clamp(var(--sp-6), 2vw, var(--sp-10));
+}
+
+.userNameMobile {
+  font-family: var(--font-family);
+  font-weight: var(--fw-medium);
+  font-size: clamp(var(--fs-12), 3.2vw, var(--fs-16));
+  line-height: 1.2;
+  letter-spacing: var(--ls-tight);
+  color: rgba(17, 16, 28, 0.9);
+
+  min-width: 0;
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logoutBtnMobile {
+  border: 1px solid var(--color-accent-primary);
+  border-radius: var(--radius-30);
+  min-height: var(--btn-height-sm);
+
+  font-family: var(--font-family);
+  font-weight: var(--fw-medium);
+  font-size: clamp(var(--fs-12), 3vw, var(--fs-14));
+  line-height: 1;
+  letter-spacing: var(--ls-ltight);
+
+  color: rgba(17, 16, 28, 0.9);
+  background: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.logoutBtnMobile:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
 @media (max-width: 900px) {
   .navDesktop,
   .authDesktop {
@@ -289,5 +415,9 @@
   .authMobile {
     gap: var(--sp-4);
     justify-content: space-evenly;
+  }
+
+  .userName {
+    max-width: 40vw;
   }
 }

@@ -8,7 +8,13 @@ import Modal from "../Modal/Modal";
 import { LoginForm } from "../LoginForm/LoginForm";
 import { RegisterForm } from "../RegisterForm/RegisterForm";
 
-import { loginUser, registerUser } from "../../lib/authApi";
+import {
+  loginUser,
+  logoutUser,
+  registerUser,
+  useAuthUser,
+} from "../../lib/authApi";
+import { notifyLoginRequired } from "../../lib/notify";
 
 type AuthMode = "login" | "register";
 
@@ -74,6 +80,17 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
     setAuthError(null);
     setIsAuthOpen(true);
     setOpen(false);
+  };
+
+  const { user, isLoading } = useAuthUser();
+
+  const handleLogout = async (): Promise<void> => {
+    setAuthError(null);
+    try {
+      await logoutUser();
+    } catch (err: unknown) {
+      setAuthError(getAuthErrorMessage(err));
+    }
   };
 
   // ESC closes mobile menu
@@ -142,30 +159,77 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
         </button>
 
         <nav className={css.navMobile} aria-label="Mobile">
-          <a className={css.mobileLink} href="#" onClick={() => setOpen(false)}>
+          <a className={css.mobileLink} href="/" onClick={() => setOpen(false)}>
             Home
           </a>
-          <a className={css.mobileLink} href="#" onClick={() => setOpen(false)}>
+          <a
+            className={css.mobileLink}
+            href="/nannies"
+            onClick={() => setOpen(false)}
+          >
             Nannies
+          </a>
+          <a
+            className={css.mobileLink}
+            href="/favorites"
+            onClick={(e) => {
+              if (!user) {
+                e.preventDefault();
+                notifyLoginRequired();
+                openRegister();
+                return;
+              }
+              setOpen(false);
+            }}
+          >
+            Favorites
           </a>
         </nav>
 
         <div className={css.authMobile}>
-          <button
-            className={css.authBtnGhost}
-            type="button"
-            onClick={openLogin}
-          >
-            Log In
-          </button>
+          {isLoading ? null : user ? (
+            <div className={css.userBarMobile}>
+              <div>
+                <span className={css.userIcon} aria-hidden="true">
+                  <svg className={css.userIconSvg}>
+                    <use href="/vite.svg#icon-user" />
+                  </svg>
+                </span>
+                <span className={css.userNameMobile}>
+                  {user.displayName ?? "User"}
+                </span>
+              </div>
 
-          <button
-            className={css.authBtnPrimary}
-            type="button"
-            onClick={openRegister}
-          >
-            Registration
-          </button>
+              <button
+                type="button"
+                className={css.logoutBtnMobile}
+                onClick={async () => {
+                  await handleLogout();
+                  setOpen(false);
+                }}
+              >
+                Log out
+              </button>
+            </div>
+          ) : (
+            <>
+              <button
+                className={css.authBtnGhost}
+                type="button"
+                onClick={openLogin}
+              >
+                Log In
+              </button>
+
+              <button
+                className={css.authBtnPrimary}
+                type="button"
+                onClick={openRegister}
+              >
+                Registration
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -203,6 +267,13 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
                 className={css.navLink}
                 href="/favorites"
                 data-active={isFavorites ? "true" : undefined}
+                onClick={(e) => {
+                  if (!user) {
+                    e.preventDefault();
+                    notifyLoginRequired();
+                    openRegister();
+                  }
+                }}
               >
                 Favorites
               </a>
@@ -210,21 +281,45 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
           </nav>
 
           <div className={css.authDesktop}>
-            <button
-              className={css.authBtnGhost}
-              type="button"
-              onClick={openLogin}
-            >
-              Log In
-            </button>
+            {isLoading ? null : user ? (
+              <div className={css.userBar}>
+                <span className={css.userIcon} aria-hidden="true">
+                  <svg className={css.userIconSvg}>
+                    <use href="/vite.svg#icon-user" />
+                  </svg>
+                </span>
 
-            <button
-              className={css.authBtnPrimary}
-              type="button"
-              onClick={openRegister}
-            >
-              Registration
-            </button>
+                <span className={css.userName}>
+                  {user.displayName ?? "User"}
+                </span>
+
+                <button
+                  type="button"
+                  className={css.logoutBtn}
+                  onClick={handleLogout}
+                >
+                  Log out
+                </button>
+              </div>
+            ) : (
+              <>
+                <button
+                  className={css.authBtnGhost}
+                  type="button"
+                  onClick={openLogin}
+                >
+                  Log In
+                </button>
+
+                <button
+                  className={css.authBtnPrimary}
+                  type="button"
+                  onClick={openRegister}
+                >
+                  Registration
+                </button>
+              </>
+            )}
           </div>
         </div>
 

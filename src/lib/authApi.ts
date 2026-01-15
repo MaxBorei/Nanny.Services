@@ -8,6 +8,8 @@ import {
 } from "firebase/auth";
 import { auth } from "./firebase";
 
+import { useEffect, useState } from "react";
+
 export type AuthUser = {
   uid: string;
   email: string | null;
@@ -49,4 +51,19 @@ export async function logoutUser(): Promise<void> {
 
 export function subscribeAuth(cb: (user: AuthUser | null) => void): () => void {
   return onAuthStateChanged(auth, (u) => cb(u ? mapUser(u) : null));
+}
+
+export function useAuthUser() {
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const unsub = subscribeAuth((u) => {
+      setUser(u);
+      setIsLoading(false);
+    });
+    return unsub;
+  }, []);
+
+  return { user, isLoading };
 }
