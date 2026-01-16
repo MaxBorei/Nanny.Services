@@ -19,7 +19,7 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} autoComplete="on">
       <div className={css.form}>
         <input
           className={css.input}
@@ -27,6 +27,10 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
           type="email"
           placeholder="Email"
           required
+          autoComplete="email"
+          inputMode="email"
+          spellCheck={false}
+          autoCapitalize="none"
         />
         <div className={css.field}>
           <input

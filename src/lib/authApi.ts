@@ -4,6 +4,7 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  reload,
   type User,
 } from "firebase/auth";
 import { auth } from "./firebase";
@@ -32,6 +33,7 @@ export async function registerUser(p: {
   const trimmed = p.name.trim();
   if (trimmed) {
     await updateProfile(cred.user, { displayName: trimmed });
+    await reload(cred.user);
   }
 
   return mapUser(cred.user);
@@ -42,6 +44,7 @@ export async function loginUser(p: {
   password: string;
 }): Promise<AuthUser> {
   const cred = await signInWithEmailAndPassword(auth, p.email, p.password);
+
   return mapUser(cred.user);
 }
 

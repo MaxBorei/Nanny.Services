@@ -132,6 +132,7 @@
 .authBtnPrimary {
   background: var(--color-accent-primary);
   border-radius: var(--radius-30);
+  border: 1px solid rgba(251, 251, 251, 0.4);
 
   padding: clamp(var(--sp-12), 1vw, var(--sp-16))
     clamp(var(--sp-16), 2.8vw, var(--sp-40));
@@ -150,7 +151,6 @@
   line-height: 1.2;
   letter-spacing: var(--ls-ltight);
   color: var(--color-text-inverse);
-  border: 1px solid transparent;
 
   cursor: pointer;
   transition: all var(--transition-fast);

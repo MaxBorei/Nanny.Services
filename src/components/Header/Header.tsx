@@ -15,6 +15,7 @@ import {
   useAuthUser,
 } from "../../lib/authApi";
 import { notifyLoginRequired } from "../../lib/notify";
+import Loader from "../Loader/Loader";
 
 type AuthMode = "login" | "register";
 
@@ -62,6 +63,11 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
   const [authError, setAuthError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // ✅ имя сразу после регистрации, пока Firebase не подтянул displayName
+  const [optimisticName, setOptimisticName] = useState<string | null>(null);
+
+  const { user, isLoading } = useAuthUser();
+
   const closeAuth = () => {
     setIsAuthOpen(false);
     setAuthError(null);
@@ -82,12 +88,11 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
     setOpen(false);
   };
 
-  const { user, isLoading } = useAuthUser();
-
   const handleLogout = async (): Promise<void> => {
     setAuthError(null);
     try {
       await logoutUser();
+      setOptimisticName(null);
     } catch (err: unknown) {
       setAuthError(getAuthErrorMessage(err));
     }
@@ -115,12 +120,12 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
     };
   }, [open]);
 
-  // handlers for forms
   const handleLoginSubmit = async (data: LoginData) => {
     setAuthError(null);
     setIsSubmitting(true);
     try {
       await loginUser(data);
+      setOptimisticName(null);
       closeAuth();
       navigate("/nannies", { replace: true });
     } catch (err: unknown) {
@@ -132,15 +137,31 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
   const handleRegisterSubmit = async (data: RegisterData) => {
     setAuthError(null);
     setIsSubmitting(true);
+
+    const trimmedName = data.name.trim();
+    if (trimmedName) setOptimisticName(trimmedName);
+
     try {
       await registerUser(data);
+      setOptimisticName(null);
       closeAuth();
       navigate("/nannies", { replace: true });
     } catch (err: unknown) {
       setAuthError(getAuthErrorMessage(err));
       setIsSubmitting(false);
+
+      setOptimisticName(null);
     }
   };
+
+  const pathname = window.location.pathname;
+  const isNannies = pathname === "/nannies" || pathname.startsWith("/nannies/");
+  const isFavorites =
+    pathname === "/favorites" || pathname.startsWith("/favorites/");
+  const showFavorites = isNannies || isFavorites;
+
+  const displayName =
+    user?.displayName ?? optimisticName ?? user?.email ?? "User";
 
   const mobileMenu = open ? (
     <div className={css.mobileMenu} role="dialog" aria-modal="true">
@@ -162,6 +183,7 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
           <a className={css.mobileLink} href="/" onClick={() => setOpen(false)}>
             Home
           </a>
+
           <a
             className={css.mobileLink}
             href="/nannies"
@@ -169,6 +191,7 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
           >
             Nannies
           </a>
+
           <a
             className={css.mobileLink}
             href="/favorites"
@@ -195,9 +218,8 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
                     <use href="/vite.svg#icon-user" />
                   </svg>
                 </span>
-                <span className={css.userNameMobile}>
-                  {user.displayName ?? "User"}
-                </span>
+
+                <span className={css.userNameMobile}>{displayName}</span>
               </div>
 
               <button
@@ -234,12 +256,6 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
       </div>
     </div>
   ) : null;
-
-  const pathname = window.location.pathname;
-  const isNannies = pathname === "/nannies" || pathname.startsWith("/nannies/");
-  const isFavorites =
-    pathname === "/favorites" || pathname.startsWith("/favorites/");
-  const showFavorites = isNannies || isFavorites;
 
   return (
     <header className={`${css.header} ${css[variant]}`}>
@@ -289,9 +305,7 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
                   </svg>
                 </span>
 
-                <span className={css.userName}>
-                  {user.displayName ?? "User"}
-                </span>
+                <span className={css.userName}>{displayName}</span>
 
                 <button
                   type="button"
@@ -348,19 +362,20 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
             : "Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information."
         }
       >
-        {/* повідомлення помилки */}
         {authError && (
           <p style={{ color: "crimson", marginBottom: 12 }}>{authError}</p>
         )}
 
-        {/* опційно: простий індикатор */}
-        {isSubmitting && <p style={{ marginBottom: 12 }}>Loading...</p>}
+        {/* ✅ loader перекрывает форму */}
+        <div style={{ position: "relative" }}>
+          {isSubmitting && <Loader message="Loading..." />}
 
-        {authMode === "login" ? (
-          <LoginForm onSubmit={handleLoginSubmit} />
-        ) : (
-          <RegisterForm onSubmit={handleRegisterSubmit} />
-        )}
+          {authMode === "login" ? (
+            <LoginForm onSubmit={handleLoginSubmit} />
+          ) : (
+            <RegisterForm onSubmit={handleRegisterSubmit} />
+          )}
+        </div>
       </Modal>
     </header>
   );
