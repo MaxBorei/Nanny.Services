@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import css from "./Hero.module.css";
 
 export default function Hero() {
@@ -14,7 +15,7 @@ export default function Hero() {
           Find Babysitters Online for All Occasions
         </p>
 
-        <button className={css.cta} type="button">
+        <Link to="/nannies" className={css.cta}>
           <span className={css.ctaText}>Get started</span>
 
           <svg
@@ -25,7 +26,7 @@ export default function Hero() {
           >
             <use href="/vite.svg#icon-Arrow" />
           </svg>
-        </button>
+        </Link>
       </div>
 
       <div className={css.right}>
