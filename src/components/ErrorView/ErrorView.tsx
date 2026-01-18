@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { MdHome, MdRefresh } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-// import { notifyLoginRequired } from "../../lib/notify";
 
 import Logo from "../Logo/Logo";
 import css from "./ErrorView.module.css";
