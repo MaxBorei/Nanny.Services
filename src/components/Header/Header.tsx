@@ -16,6 +16,7 @@ import {
 } from "../../lib/authApi";
 import { notifyLoginRequired } from "../../lib/notify";
 import Loader from "../Loader/Loader";
+import ErrorView from "../ErrorView/ErrorView";
 
 type AuthMode = "login" | "register";
 
@@ -362,11 +363,8 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
             : "Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information."
         }
       >
-        {authError && (
-          <p style={{ color: "crimson", marginBottom: 12 }}>{authError}</p>
-        )}
+        {authError && <ErrorView message={authError} />}
 
-        {/* ✅ loader перекрывает форму */}
         <div style={{ position: "relative" }}>
           {isSubmitting && <Loader message="Loading..." />}
 
