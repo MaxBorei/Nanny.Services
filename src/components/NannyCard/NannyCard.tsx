@@ -27,7 +27,7 @@ type NannyCardProps = {
 
 export function NannyCard({
   avatarUrl,
-  isOnline = true,
+  isOnline = false,
 
   role = "Nanny",
   name,
@@ -63,25 +63,27 @@ export function NannyCard({
             <h3 className={css.name}>{name}</h3>
           </div>
 
-          <div className={css.meta}>
-            <div className={css.metaItem}>
-              <span className={css.icon} aria-hidden="true">
-                📍
-              </span>
-              <span className={css.metaText}>{location}</span>
-            </div>
-
-            <div className={css.metaItem}>
-              <span className={css.icon} aria-hidden="true">
-                ⭐
-              </span>
-              <span className={css.metaText}>Rating: {rating.toFixed(1)}</span>
-            </div>
-
-            <div className={css.metaItem}>
-              <span className={css.metaText}>
-                Price / 1 hour: <b className={css.price}>{pricePerHour}$</b>
-              </span>
+          <div className={css.meta_favorite}>
+            <div className={css.meta}>
+              <div className={css.metaItem}>
+                <span className={css.icon} aria-hidden="true">
+                  📍
+                </span>
+                <span className={css.metaText}>{location}</span>
+              </div>
+              <div className={css.metaItem}>
+                <span className={css.icon} aria-hidden="true">
+                  ⭐
+                </span>
+                <span className={css.metaText}>
+                  Rating: {rating.toFixed(1)}
+                </span>
+              </div>
+              <div className={css.metaItem}>
+                <span className={css.metaText}>
+                  Price / 1 hour: <b className={css.price}>{pricePerHour}$</b>
+                </span>
+              </div>
             </div>
 
             <button
