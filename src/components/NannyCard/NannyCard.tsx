@@ -67,13 +67,27 @@ export function NannyCard({
             <div className={css.meta}>
               <div className={css.metaItem}>
                 <span className={css.icon} aria-hidden="true">
-                  📍
+                  <svg
+                    className={css.ctaIcon}
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <use href="/vite.svg#icon-map" />
+                  </svg>
                 </span>
                 <span className={css.metaText}>{location}</span>
               </div>
               <div className={css.metaItem}>
                 <span className={css.icon} aria-hidden="true">
-                  ⭐
+                  <svg
+                    className={css.ctaIcon_star}
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <use href="/vite.svg#icon-Star" />
+                  </svg>
                 </span>
                 <span className={css.metaText}>
                   Rating: {rating.toFixed(1)}
@@ -95,9 +109,14 @@ export function NannyCard({
               }
               onClick={onToggleFavorite}
             >
-              <span className={css.favIcon} aria-hidden="true">
-                {isFavorite ? "♥" : "♡"}
-              </span>
+              <svg
+                className={`${css.favIcon} ${
+                  isFavorite ? css.favIconFilled : css.favIconOutline
+                }`}
+                aria-hidden="true"
+              >
+                <use href="/vite.svg#icon-heard" />
+              </svg>
             </button>
           </div>
         </header>

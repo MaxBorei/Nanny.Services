@@ -1,7 +1,32 @@
+import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import { NannyCard } from "../../components/NannyCard/NannyCard";
 
+const LS_KEY = "favorite_nannies";
+
 export default function Nannies() {
+  const nannyId = "maria-kovalenko"; // ❗ уникальный id карточки
+
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem(LS_KEY) || "[]");
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem(LS_KEY, JSON.stringify(favorites));
+  }, [favorites]);
+
+  const toggleFavorite = (id) => {
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
+  };
+
+  const isFavorite = favorites.includes(nannyId);
+
   return (
     <>
       <Header variant="solid" />
@@ -25,8 +50,8 @@ export default function Nannies() {
         education="Master's in Child Psychology, CPR Certified"
         about="I have a passion for teaching and mentoring children..."
         onReadMore={() => console.log("read more")}
-        onToggleFavorite={() => console.log("fav")}
-        isFavorite={false}
+        isFavorite={isFavorite}
+        onToggleFavorite={() => toggleFavorite(nannyId)}
       />
     </>
   );

@@ -76,10 +76,11 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--sp-12);
-  color: var(--color-text-secondary);
-  font-size: var(--fs-14);
-  line-height: var(--lh-14);
+  gap: var(--sp-32);
+  color: var(--color-text-third);
+  font-size: var(--fs-16);
+  line-height: 1.5;
+  font-weight: var(--fw-medium);
 }
 
 .meta_favorite {
@@ -92,7 +93,7 @@
 .metaItem {
   display: inline-flex;
   align-items: center;
-  gap: var(--sp-8);
+  gap: var(--sp-4);
   max-width: 100%;
 }
 
@@ -101,10 +102,34 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 48ch;
+  padding: 4px 0;
 }
 
 .icon {
   line-height: 1;
+}
+
+.ctaIcon {
+  fill: var(--color-accent-inverse);
+  stroke: var(--color-text-third);
+  stroke-width: 1.5px;
+
+  flex-shrink: 0;
+  width: clamp(var(--sp-12), 1vw, var(--sp-16));
+  height: clamp(var(--sp-12), 1.1vw, var(--sp-16));
+  flex: 0 0 clamp(var(--sp-12), 1.1vw, var(--sp-16));
+
+  display: block;
+}
+
+.ctaIcon_star {
+  fill: #ffc531;
+  flex-shrink: 0;
+  width: clamp(var(--sp-12), 1vw, var(--sp-16));
+  height: clamp(var(--sp-12), 1.1vw, var(--sp-16));
+  flex: 0 0 clamp(var(--sp-12), 1.1vw, var(--sp-16));
+
+  display: block;
 }
 
 .price {
@@ -126,26 +151,23 @@
   place-items: center;
 }
 
-.favBtn:hover {
-  background: var(--color-bg-secondary);
-}
-
-.favBtn:active {
-  transform: scale(0.98);
-}
-
-.favBtn:focus-visible {
-  outline: none;
-  border-color: var(--color-border-medium);
-}
-
 .favIcon {
-  font-size: 18px;
-  color: var(--color-text-primary);
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex-shrink: 0;
 }
 
-.favBtn[aria-pressed="true"] .favIcon {
-  color: var(--color-accent-pink);
+.favIconOutline {
+  fill: none;
+  stroke: #11101c;
+  stroke-width: 2px;
+}
+
+.favIconFilled {
+  fill: #f03f3b;
+  stroke: #f03f3b;
+  stroke-width: 2px;
 }
 
 .chips {
