@@ -20,7 +20,7 @@
 
   /* Backgrounds */
   --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f2f2f7;
+  --color-bg-secondary: #f3f3f3;
   --color-bg-inverse: #fbfbfb;
   --color-accent-primary: #f03f3b;
 
@@ -41,8 +41,9 @@
   /* ================= TYPOGRAPHY ================= */
 
   /* Font family */
-  --font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  --font-family:
+    "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 
   /* Font weights */
   --fw-regular: 400;

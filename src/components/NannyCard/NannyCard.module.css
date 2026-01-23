@@ -49,6 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 24px;
 }
 
 .title {
@@ -138,24 +139,26 @@
 }
 
 .favBtn {
-  margin-left: auto;
-  width: 40px;
-  height: 40px;
+  width: 26px;
+  height: 26px;
+  padding: 0;
   border-radius: var(--radius-pill);
   border: 1px solid transparent;
   background: transparent;
   cursor: pointer;
-  transition: background var(--transition-fast),
+  transition:
+    background var(--transition-fast),
     transform var(--transition-fast);
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .favIcon {
-  width: 16px;
-  height: 16px;
   display: block;
   flex-shrink: 0;
+  width: 25px;
+  height: 22px;
 }
 
 .favIconOutline {
@@ -173,38 +176,32 @@
 .chips {
   list-style: none;
   padding: 0;
-  margin: var(--sp-16) 0 0;
   display: flex;
   flex-wrap: wrap;
   gap: var(--sp-8);
+  margin-bottom: 24px;
 }
 
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: var(--sp-8);
-  padding: var(--sp-8) var(--sp-12);
+  padding: var(--sp-8) var(--sp-16);
   border-radius: var(--radius-pill);
   background: var(--color-bg-secondary);
-  color: var(--color-text-primary);
   max-width: 100%;
   min-width: 0;
 }
 
-.chipWide {
-  flex: 1 1 320px;
-}
-
 .chipLabel {
   color: var(--color-text-secondary);
-  font-size: var(--fs-14);
-  line-height: var(--lh-14);
+  font-size: var(--fs-16);
 }
 
 .chipValue {
-  font-size: var(--fs-14);
-  line-height: var(--lh-14);
+  font-size: var(--fs-16);
+  line-height: 1.5;
   font-weight: var(--fw-medium);
+  color: var(--color-text-third);
   min-width: 0;
 }
 
@@ -215,30 +212,113 @@
 }
 
 .about {
-  margin: var(--sp-16) 0 0;
-  color: var(--color-text-secondary);
-  font-size: var(--fs-14);
-  line-height: var(--lh-20);
-  max-width: 80ch;
+  color: rgba(17, 16, 28, 0.5);
+  font-size: var(--fs-16);
+  line-height: 1.25;
+  margin-bottom: 14px;
 }
 
 .readMore {
-  margin-top: var(--sp-8);
   border: none;
   background: transparent;
   padding: 0;
-  color: var(--color-text-primary);
-  font-weight: var(--fw-bold);
-  font-size: var(--fs-14);
-  line-height: var(--lh-14);
+  color: var(--color-text-third);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-16);
+  line-height: 1.5;
   text-decoration: underline;
-  text-underline-offset: 4px;
-  cursor: pointer;
+  text-decoration-skip-ink: none;
   transition: color var(--transition-fast);
 }
 
 .readMore:hover {
   color: var(--color-text-hover);
+}
+
+.reviews {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.reviewItem {
+  padding: 0;
+}
+
+.reviewRow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.reviewAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  flex: 0 0 auto;
+  background: rgba(244, 63, 94, 0.12);
+  color: rgba(244, 63, 94, 1);
+}
+
+.reviewContent {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.reviewHeader {
+  display: flex;
+  margin-bottom: 6px;
+  flex-direction: column;
+}
+
+.reviewName {
+  font-weight: 600;
+}
+
+.reviewRating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.reviewComment {
+  margin: 0;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.appointmentBtn {
+  background: var(--color-accent-primary);
+  border-radius: var(--radius-30);
+  border: 1px solid rgba(251, 251, 251, 0.4);
+
+  padding: clamp(var(--sp-12), 1vw, var(--sp-16))
+    clamp(var(--sp-16), 2.8vw, var(--sp-40));
+  min-height: var(--btn-height-sm);
+
+  width: auto;
+  min-width: clamp(120px, 12vw, 168px);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--font-family);
+  font-weight: var(--fw-medium);
+  font-size: clamp(var(--fs-12), 1.11vw, var(--fs-16));
+  line-height: 1.2;
+  letter-spacing: var(--ls-ltight);
+  color: var(--color-text-inverse);
+
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
 @media (max-width: 900px) {
