@@ -64,7 +64,6 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
   const [authError, setAuthError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // ✅ имя сразу после регистрации, пока Firebase не подтянул displayName
   const [optimisticName, setOptimisticName] = useState<string | null>(null);
 
   const { user, isLoading } = useAuthUser();

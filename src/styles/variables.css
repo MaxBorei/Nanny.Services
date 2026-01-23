@@ -33,6 +33,7 @@
   --color-text-inverse: #fbfbfb;
   --color-text-hover: #f03f3b;
   --color-text-third: #11101c;
+  --color-text-fourth: rgba(17, 16, 28, 0.5);
 
   /* Borders */
   --color-border-light: rgba(0, 0, 0, 0.08);

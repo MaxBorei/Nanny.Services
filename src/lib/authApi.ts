@@ -10,12 +10,7 @@ import {
 import { auth } from "./firebase";
 
 import { useEffect, useState } from "react";
-
-export type AuthUser = {
-  uid: string;
-  email: string | null;
-  displayName: string | null;
-};
+import type { AuthUser } from "../types/AuthUser";
 
 const mapUser = (u: User): AuthUser => ({
   uid: u.uid,

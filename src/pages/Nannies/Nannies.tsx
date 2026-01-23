@@ -1,33 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import Header from "../../components/Header/Header";
 import { NannyCard } from "../../components/NannyCard/NannyCard";
+import Loader from "../../components/Loader/Loader";
+import ErrorView from "../../components/ErrorView/ErrorView";
+import type { Nanny, NannyFromApi } from "../../types/Nannies";
 
 const LS_KEY = "favorite_nannies";
-const API_URL =
-  "https://nanny-services-f1f8e-default-rtdb.europe-west1.firebasedatabase.app/nannies.json";
+const API_URL = import.meta.env.VITE_FIREBASE_API_URL;
 
-export type Review = {
-  reviewer: string;
-  rating: number;
-  comment: string;
-};
-
-export type NannyFromApi = {
-  name: string;
-  avatar_url: string;
-  birthday: string;
-  experience: string;
-  reviews?: Review[];
-  education: string;
-  kids_age: string;
-  price_per_hour: number;
-  location: string;
-  about: string;
-  characters: string[];
-  rating: number;
-};
-
-export type Nanny = NannyFromApi & { id: string };
 type NanniesResponse = Record<string, NannyFromApi>;
 
 const calcAge = (isoDate: string): number | null => {
@@ -111,8 +91,8 @@ export default function Nannies() {
     <>
       <Header variant="solid" />
 
-      {loading && <p style={{ padding: 16 }}>Loading…</p>}
-      {error && <p style={{ padding: 16, color: "crimson" }}>{error}</p>}
+      {loading && <Loader />}
+      {error && <ErrorView />}
 
       {!loading &&
         !error &&

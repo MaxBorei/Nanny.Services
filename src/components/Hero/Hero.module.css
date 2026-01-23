@@ -144,7 +144,7 @@
   font-family: var(--font-family);
   font-weight: var(--fw-regular);
   font-size: clamp(var(--fs-12), 1.11vw, var(--fs-16));
-  color: rgba(17, 16, 28, 0.5);
+  color: var(--color-text-fourth);
   white-space: nowrap;
   margin: 0;
   line-height: 1.2;

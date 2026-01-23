@@ -1,5 +1,8 @@
+import { useState } from "react";
+import type { Review } from "../../types/Nannies";
+import Modal from "../Modal/Modal";
 import css from "./NannyCard.module.css";
-import type { Review } from "../../pages/Nannies/Nannies";
+import AppointmentForm from "../AppointmentForm/AppointmentForm";
 
 type NannyCardProps = {
   avatarUrl: string;
@@ -21,7 +24,6 @@ type NannyCardProps = {
 
   about: string;
 
-  // ✅ новое
   reviews: Review[];
   isExpanded: boolean;
   onToggleReadMore: () => void;
@@ -31,10 +33,8 @@ type NannyCardProps = {
 };
 
 const getInitials = (fullName: string): string => {
-  const parts = fullName.trim().split(/\s+/);
-  const first = parts[0]?.[0] ?? "";
-  const second = parts[1]?.[0] ?? "";
-  return (first + second).toUpperCase() || "?";
+  const firstName = fullName.trim().split(/\s+/)[0];
+  return firstName ? firstName[0].toUpperCase() : "?";
 };
 
 export function NannyCard({
@@ -64,6 +64,11 @@ export function NannyCard({
   isFavorite = false,
   onToggleFavorite,
 }: NannyCardProps) {
+  const [isAppointment, setIsAppointment] = useState(false);
+
+  const openModal = () => setIsAppointment(true);
+  const closeModal = () => setIsAppointment(false);
+
   return (
     <section className={css.card} aria-label={`${role}: ${name}`}>
       <div className={css.avatar}>
@@ -164,7 +169,6 @@ export function NannyCard({
 
         <p className={css.about}>{about}</p>
 
-        {/* КНОПКА только пока НЕ раскрыто */}
         {!isExpanded && (
           <button
             type="button"
@@ -175,7 +179,6 @@ export function NannyCard({
           </button>
         )}
 
-        {/* ОТЗЫВЫ + КНОПКА только когда раскрыто */}
         {isExpanded && (
           <>
             {reviews.length > 0 && (
@@ -214,9 +217,21 @@ export function NannyCard({
               </ul>
             )}
 
-            <button type="button" className={css.appointmentBtn}>
+            <button
+              type="button"
+              className={css.appointmentBtn}
+              onClick={openModal}
+            >
               Make an appointment
             </button>
+
+            <Modal isOpen={isAppointment} onClose={closeModal}>
+              <AppointmentForm
+                nannyName={name}
+                avatar_url={avatarUrl}
+                onClose={closeModal}
+              />
+            </Modal>
           </>
         )}
       </div>
