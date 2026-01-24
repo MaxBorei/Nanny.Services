@@ -4,6 +4,7 @@ import { NannyCard } from "../../components/NannyCard/NannyCard";
 import Loader from "../../components/Loader/Loader";
 import ErrorView from "../../components/ErrorView/ErrorView";
 import type { Nanny, NannyFromApi } from "../../types/Nannies";
+import Filters, { type SortValue } from "../../components/Filters/Filters";
 
 const LS_KEY = "favorite_nannies";
 const API_URL = import.meta.env.VITE_FIREBASE_API_URL;
@@ -40,6 +41,8 @@ export default function Nannies() {
       return [];
     }
   });
+
+  const [sort, setSort] = useState<SortValue>("a-z");
 
   useEffect(() => {
     localStorage.setItem(LS_KEY, JSON.stringify(favorites));
@@ -85,7 +88,37 @@ export default function Nannies() {
     return () => controller.abort();
   }, []);
 
-  const cards = useMemo(() => nannies, [nannies]);
+  const cards = useMemo(() => {
+    const arr = [...nannies];
+
+    arr.sort((a, b) => {
+      switch (sort) {
+        case "a-z":
+          return a.name.localeCompare(b.name);
+
+        case "z-a":
+          return b.name.localeCompare(a.name);
+
+        case "price-low":
+          return a.price_per_hour - b.price_per_hour;
+
+        case "price-high":
+          return b.price_per_hour - a.price_per_hour;
+
+        case "rating-low":
+          return a.rating - b.rating;
+
+        case "rating-high":
+          return b.rating - a.rating;
+
+        case "all":
+        default:
+          return 0;
+      }
+    });
+
+    return arr;
+  }, [nannies, sort]);
 
   return (
     <>
@@ -93,6 +126,8 @@ export default function Nannies() {
 
       {loading && <Loader />}
       {error && <ErrorView />}
+
+      <Filters value={sort} onChange={setSort} />
 
       {!loading &&
         !error &&

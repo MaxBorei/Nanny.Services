@@ -1,10 +1,10 @@
 .title {
   font-weight: var(--fw-medium);
-  font-size: var(--fs-40);
+  font-size: clamp(var(--fs-28), 3.2vw, var(--fs-40));
   line-height: 1.2;
   letter-spacing: var(--ls-tight);
   color: var(--color-text-third);
-  margin-bottom: 20px;
+  margin-bottom: clamp(var(--sp-16), 2vw, var(--sp-20));
 }
 
 .text {
@@ -12,66 +12,83 @@
   font-size: var(--fs-16);
   line-height: 1.25;
   color: var(--color-text-fourth);
-  margin-bottom: 40px;
+  margin-bottom: clamp(var(--sp-24), 4vw, var(--sp-40));
 }
 
 .nanny {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 40px;
+  gap: clamp(var(--sp-8), 1.2vw, var(--sp-12));
+  margin-bottom: clamp(var(--sp-24), 4vw, var(--sp-40));
 }
+
 .nannyAvatar {
-  width: 44px;
-  height: 44px;
+  width: clamp(38px, 3.2vw, 44px);
+  height: clamp(38px, 3.2vw, 44px);
   border-radius: 50%;
   background: #eee;
 }
 
 .nannyImg {
-  border-radius: 15px;
-  width: 44px;
-  height: 44px;
+  border-radius: clamp(var(--radius-12), 1.6vw, 15px);
+  width: clamp(38px, 3.2vw, 44px);
+  height: clamp(38px, 3.2vw, 44px);
 }
 
 .nannyLabel {
-  font-size: 12px;
+  font-size: var(--fs-12);
   opacity: 0.7;
 }
+
 .nannyName {
   font-weight: 600;
 }
 
 .form {
   display: grid;
-  gap: 12px;
+  gap: clamp(var(--sp-8), 1.2vw, var(--sp-12));
 }
+
 .row2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: clamp(var(--sp-8), 1.2vw, var(--sp-12));
 }
 
 .input,
 .textarea {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 12px;
+  padding: var(--sp-12) 14px;
+  border-radius: var(--radius-12);
   border: 1px solid rgba(0, 0, 0, 0.12);
   outline: none;
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-16);
+  line-height: 1.25;
+  color: var(--color-text-third);
+  resize: none;
 }
 
 .submit {
-  margin-top: 40px;
+  margin-top: clamp(var(--sp-24), 4vw, var(--sp-40));
   width: 100%;
-  padding: 16px auto;
+  padding: var(--sp-16) clamp(var(--sp-16), 4vw, var(--sp-40));
   border: none;
   background: var(--color-accent-primary);
-  border-radius: 30px;
+  border-radius: var(--radius-30);
   height: 52px;
   font-weight: var(--fw-medium);
   font-size: var(--fs-16);
   line-height: 1.25;
   letter-spacing: var(--ls-ltight);
   color: var(--color-text-inverse);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+@media (max-width: 900px) {
+  .row2 {
+    grid-template-columns: 1fr;
+  }
 }

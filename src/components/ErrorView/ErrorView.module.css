@@ -6,18 +6,19 @@
   display: grid;
   place-items: center;
 
-  padding: clamp(16px, 4vw, 32px);
+  padding: clamp(var(--sp-16), 4vw, var(--sp-32));
 }
 
 .card {
   width: min(680px, 100%);
   background: var(--white);
   border: 1px solid var(--gray-light);
-  border-radius: clamp(12px, 2vw, 16px);
+  border-radius: clamp(var(--radius-12), 2vw, var(--radius-16));
 
-  padding: clamp(20px, 4vw, 32px);
+  padding: clamp(var(--sp-20), 4vw, var(--sp-32));
 
-  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04),
+  box-shadow:
+    0 1px 2px rgba(16, 24, 40, 0.04),
     0 10px 24px rgba(16, 24, 40, 0.06);
 
   text-align: center;
@@ -26,27 +27,27 @@
 .illu {
   display: grid;
   place-items: center;
-  margin-bottom: clamp(8px, 2vw, 16px);
+  margin-bottom: clamp(var(--sp-8), 2vw, var(--sp-16));
 }
 
 .code {
   font-size: clamp(22px, 3.5vw, 30px);
   line-height: 1.2;
-  font-weight: var(--fw-semibold);
+  font-weight: 600;
   margin: clamp(4px, 1vw, 8px) 0;
   letter-spacing: -0.01em;
 }
 
 .message {
   color: var(--text);
-  font-size: clamp(14px, 2.6vw, 16px);
+  font-size: clamp(var(--fs-14), 2.6vw, var(--fs-16));
   line-height: 1.55;
-  margin: 0 0 clamp(16px, 3vw, 24px);
+  margin-bottom: clamp(var(--sp-16), 3vw, var(--sp-24));
 }
 
 .actions {
   display: flex;
-  gap: clamp(8px, 2vw, 16px);
+  gap: clamp(var(--sp-8), 2vw, var(--sp-16));
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -60,16 +61,20 @@
   padding: clamp(10px, 2.5vw, 12px) clamp(14px, 4vw, 18px);
 
   border-radius: clamp(10px, 2vw, 12px);
-  font-weight: var(--fw-semibold);
+  font-weight: 600;
 
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sp-8);
 
   cursor: pointer;
 
-  transition: transform 0.06s ease, background 0.15s ease,
-    border-color 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.06s ease,
+    background 0.15s ease,
+    border-color 0.15s ease,
+    opacity 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .button:active {

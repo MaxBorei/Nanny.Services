@@ -22,7 +22,6 @@
   background-repeat: no-repeat;
 }
 
-/* Общие настройки для фоновых половин */
 .bgLeft,
 .bgRight {
   position: absolute;
@@ -32,19 +31,16 @@
   z-index: 0;
 }
 
-/* Левая половина — красная */
 .bgLeft {
   left: 0;
   background: var(--color-accent-red);
 }
 
-/* Поднимаем весь контент над фоном */
 .split > *:not(.bgLeft):not(.bgRight) {
   position: relative;
   z-index: 1;
 }
 
-/* Адаптив: на узких экранах делаем в колонку */
 @media (max-width: 900px) {
   .bgLeft,
   .bgRight {

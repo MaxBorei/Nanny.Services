@@ -98,7 +98,6 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
     }
   };
 
-  // ESC closes mobile menu
   useEffect(() => {
     if (!open) return;
 
@@ -110,7 +109,6 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
-  // lock body scroll when menu is open
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;

@@ -6,8 +6,9 @@
   padding: var(--fluid-sp-16-24);
   display: flex;
   gap: var(--fluid-inner-gap);
-  align-items: start;
+  align-items: flex-start;
   max-width: 100%;
+  margin-bottom: var(--sp-32);
 }
 
 .avatar {
@@ -18,7 +19,7 @@
   justify-content: center;
   align-items: center;
   border: 2px solid rgba(240, 63, 59, 0.2);
-  border-radius: 30px;
+  border-radius: var(--radius-30);
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -43,18 +44,20 @@
 
 .body {
   min-width: 0;
+  flex: 1 1 auto;
 }
 
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
+  column-gap: var(--sp-16);
+  margin-bottom: var(--sp-24);
 }
 
 .title {
   min-width: 0;
-  margin-right: calc(16px + 295 * ((100vw - 320px) / 1120));
+  margin-right: 0;
 }
 
 .role {
@@ -63,7 +66,7 @@
   line-height: 1.5;
   color: var(--color-text-secondary);
   font-weight: var(--fw-medium);
-  margin-bottom: 8px;
+  margin-bottom: var(--sp-8);
 }
 
 .name {
@@ -96,6 +99,19 @@
   align-items: center;
   gap: var(--sp-4);
   max-width: 100%;
+  position: relative;
+  min-width: 0;
+}
+
+.metaItem:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: calc(var(--sp-32) / 2 * -1);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 16px;
+  background-color: rgba(17, 16, 28, 0.2);
 }
 
 .metaText {
@@ -152,6 +168,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  align-self: start;
 }
 
 .favIcon {
@@ -179,7 +196,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--sp-8);
-  margin-bottom: 24px;
+  margin-bottom: var(--sp-24);
 }
 
 .chip {
@@ -190,6 +207,7 @@
   background: var(--color-bg-secondary);
   max-width: 100%;
   min-width: 0;
+  gap: var(--sp-4);
 }
 
 .chipLabel {
@@ -239,7 +257,7 @@
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 16px;
+  gap: var(--sp-16);
   margin-top: 48px;
   margin-bottom: 48px;
 }
@@ -332,7 +350,7 @@
 
 @media (max-width: 900px) {
   .card {
-    grid-template-columns: 56px 1fr;
+    gap: var(--sp-12);
   }
 
   .avatar {
@@ -341,11 +359,36 @@
     border-radius: var(--radius-12);
   }
 
-  .name {
-    font-size: var(--fs-24);
+  .avatarImg {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-12);
+  }
+
+  .onlineDot {
+    top: 6px;
+    right: 6px;
+  }
+
+  .header {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--sp-8);
+    margin-bottom: var(--sp-16);
   }
 
   .favBtn {
-    margin-left: 0;
+    justify-self: start;
+  }
+
+  .meta {
+    gap: var(--sp-16);
+  }
+
+  .metaItem:not(:last-child)::after {
+    display: none;
+  }
+
+  .metaText {
+    max-width: 28ch;
   }
 }

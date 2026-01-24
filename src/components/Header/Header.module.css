@@ -268,14 +268,12 @@
   gap: var(--sp-8);
 }
 
-/* ===== Auth user bar (icon + name + logout) ===== */
-
 .userBar {
   display: inline-flex;
   align-items: center;
   gap: clamp(var(--sp-8), 1vw, var(--sp-16));
   flex-shrink: 0;
-  min-width: 0; /* щоб ім'я могло обрізатись */
+  min-width: 0;
 }
 
 .userIcon {
@@ -290,14 +288,12 @@
   flex: 0 0 auto;
 }
 
-/* svg-іконка */
 .userIconSvg {
   width: clamp(18px, 1.6vw, 22px);
   height: clamp(18px, 1.6vw, 22px);
   fill: var(--color-accent-primary);
 }
 
-/* ім’я */
 .userName {
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
@@ -312,7 +308,6 @@
   text-overflow: ellipsis;
 }
 
-/* кнопка Log out в стилі ghost */
 .logoutBtn {
   border: 1px solid rgba(251, 251, 251, 0.4);
   border-radius: var(--radius-30);

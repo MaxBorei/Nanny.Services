@@ -5,9 +5,9 @@ type TimePickerProps = {
   value: string;
   onChange: (time: string) => void;
   disabled?: boolean;
-  start?: string; // "08:00"
-  end?: string; // "20:00"
-  stepMinutes?: number; // 30
+  start?: string;
+  end?: string;
+  stepMinutes?: number;
   placeholder?: string;
 };
 
@@ -54,7 +54,6 @@ export default function TimePicker({
     setOpen(false);
   };
 
-  // закрытие по клику вне
   useEffect(() => {
     const onDocClick = (e: MouseEvent) => {
       if (!wrapRef.current) return;
@@ -64,7 +63,6 @@ export default function TimePicker({
     return () => document.removeEventListener("mousedown", onDocClick);
   }, []);
 
-  // скроллим к выбранному значению при открытии
   useEffect(() => {
     if (!open) return;
     const idx = times.indexOf(value);
