@@ -19,4 +19,20 @@ export type NannyFromApi = {
   rating: number;
 };
 
-export type Nanny = NannyFromApi & { id: string };
+export type Nanny = {
+  id: string;
+  name: string;
+  avatarUrl: string;
+  birthday: string;
+  experience: string;
+  experienceYears: number;
+  reviews?: Review[];
+  education: string;
+  kidsAgeRange: string;
+  pricePerHour: number;
+  location: string;
+  about: string;
+  characters: string[];
+  rating: number;
+  age: number;
+};

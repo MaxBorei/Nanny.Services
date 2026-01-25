@@ -1,0 +1,33 @@
+.btnContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.loadBtn {
+  margin-top: 32px;
+  margin-bottom: 100px;
+  background: var(--color-accent-primary);
+  border-radius: var(--radius-30);
+  border: 1px solid rgba(251, 251, 251, 0.4);
+
+  padding: clamp(var(--sp-12), 1vw, var(--sp-16))
+    clamp(var(--sp-16), 2.8vw, var(--sp-40));
+  min-height: var(--btn-height-sm);
+
+  width: auto;
+  min-width: clamp(120px, 12vw, 168px);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--font-family);
+  font-weight: var(--fw-medium);
+  font-size: clamp(var(--fs-12), 1.11vw, var(--fs-16));
+  line-height: 1.2;
+  letter-spacing: var(--ls-ltight);
+  color: var(--color-text-inverse);
+
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}

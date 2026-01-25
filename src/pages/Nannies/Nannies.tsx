@@ -5,6 +5,7 @@ import Loader from "../../components/Loader/Loader";
 import ErrorView from "../../components/ErrorView/ErrorView";
 import type { Nanny, NannyFromApi } from "../../types/Nannies";
 import Filters, { type SortValue } from "../../components/Filters/Filters";
+import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton";
 
 const LS_KEY = "favorite_nannies";
 const API_URL = import.meta.env.VITE_FIREBASE_API_URL;
@@ -43,6 +44,12 @@ export default function Nannies() {
   });
 
   const [sort, setSort] = useState<SortValue>("a-z");
+  const ITEMS_PER_PAGE = 3;
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+
+  useEffect(() => {
+    setVisibleCount(ITEMS_PER_PAGE);
+  }, [sort]);
 
   useEffect(() => {
     localStorage.setItem(LS_KEY, JSON.stringify(favorites));
@@ -71,9 +78,22 @@ export default function Nannies() {
 
         const data = (await res.json()) as NanniesResponse;
 
-        const list: Nanny[] = Object.entries(data || {}).map(([id, nanny]) => ({
+        const list: Nanny[] = Object.entries(data || {}).map(([id, n]) => ({
           id,
-          ...nanny,
+          name: n.name,
+          avatarUrl: n.avatar_url,
+          birthday: n.birthday,
+          experience: n.experience,
+          experienceYears: parseExperienceYears(n.experience) ?? 0,
+          reviews: n.reviews ?? [],
+          education: n.education,
+          kidsAgeRange: n.kids_age,
+          pricePerHour: n.price_per_hour,
+          location: n.location,
+          about: n.about,
+          characters: n.characters ?? [],
+          rating: n.rating,
+          age: calcAge(n.birthday) ?? 0,
         }));
 
         setNannies(list);
@@ -100,10 +120,10 @@ export default function Nannies() {
           return b.name.localeCompare(a.name);
 
         case "price-low":
-          return a.price_per_hour - b.price_per_hour;
+          return a.pricePerHour - b.pricePerHour;
 
         case "price-high":
-          return b.price_per_hour - a.price_per_hour;
+          return b.pricePerHour - a.pricePerHour;
 
         case "rating-low":
           return a.rating - b.rating;
@@ -131,22 +151,22 @@ export default function Nannies() {
 
       {!loading &&
         !error &&
-        cards.map((n) => {
+        cards.slice(0, visibleCount).map((n) => {
           const isFavorite = favorites.includes(n.id);
           const isExpanded = expandedId === n.id;
 
           return (
             <NannyCard
               key={n.id}
-              avatarUrl={n.avatar_url}
+              avatarUrl={n.avatarUrl}
               isOnline={true}
               name={n.name}
               location={n.location}
               rating={n.rating}
-              pricePerHour={n.price_per_hour}
+              pricePerHour={n.pricePerHour}
               age={calcAge(n.birthday) ?? 0}
               experienceYears={parseExperienceYears(n.experience) ?? 0}
-              kidsAgeRange={n.kids_age}
+              kidsAgeRange={n.kidsAgeRange}
               characters={(n.characters || []).map(
                 (c) => c.charAt(0).toUpperCase() + c.slice(1),
               )}
@@ -160,6 +180,12 @@ export default function Nannies() {
             />
           );
         })}
+
+      {!loading && !error && visibleCount < cards.length && (
+        <LoadMoreButton
+          onClick={() => setVisibleCount((p) => p + ITEMS_PER_PAGE)}
+        />
+      )}
     </>
   );
 }

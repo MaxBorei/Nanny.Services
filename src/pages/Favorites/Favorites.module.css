@@ -1,0 +1,85 @@
+.empty {
+  max-width: 620px;
+  margin: clamp(var(--sp-16), 2.2vw, var(--sp-40)) auto 0;
+  padding: clamp(var(--sp-16), 2.4vw, var(--sp-32));
+  border-radius: var(--radius-12);
+  border: 1px solid var(--color-border-light);
+  background: var(--color-bg-inverse);
+  box-shadow: 0 18px 60px rgba(17, 16, 28, 0.06);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+}
+
+.emptyTitle {
+  margin: 0;
+  font-size: clamp(20px, 1.8vw, 28px);
+  font-weight: var(--fw-medium);
+  line-height: 1.2;
+  letter-spacing: var(--ls-ltight);
+  color: var(--color-text-primary);
+}
+
+.emptyText {
+  margin: 0;
+  font-size: clamp(var(--fs-14), 1.25vw, var(--fs-16));
+  font-weight: var(--fw-regular);
+  line-height: 1.35;
+  color: var(--color-text-third);
+  max-width: 48ch;
+}
+
+.emptyBtn {
+  height: clamp(46px, 3.9vw, 58px);
+  padding-inline: clamp(var(--sp-16), 2.2vw, var(--sp-24));
+  border: 0;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+
+  background: var(--color-accent-primary);
+  color: var(--color-accent-inverse);
+  font-size: clamp(var(--fs-14), 1.25vw, var(--fs-16));
+  font-weight: var(--fw-medium);
+  line-height: 1.25;
+  letter-spacing: var(--ls-ltight);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: min(100%, 320px);
+}
+
+.emptyBtn:hover {
+  filter: brightness(0.96);
+}
+
+.emptyBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(17, 16, 28, 0.06);
+}
+
+.emptyIconWrap {
+  width: clamp(44px, 4.2vw, 58px);
+  height: clamp(44px, 4.2vw, 58px);
+  border-radius: var(--radius-12);
+  border: 1px solid var(--color-border-light);
+  background: rgba(0, 0, 0, 0.02);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptyIcon {
+  width: clamp(var(--sp-16), 1.6vw, var(--sp-24));
+  height: clamp(var(--sp-16), 1.6vw, var(--sp-24));
+  display: block;
+
+  fill: var(--color-accent-primary);
+  stroke: var(--color-accent-primary);
+  stroke-width: 1px;
+}
