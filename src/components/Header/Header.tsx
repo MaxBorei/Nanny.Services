@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
 import css from "./Header.module.css";
 
@@ -178,21 +178,25 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
         </button>
 
         <nav className={css.navMobile} aria-label="Mobile">
-          <a className={css.mobileLink} href="/" onClick={() => setOpen(false)}>
-            Home
-          </a>
-
-          <a
+          <Link
             className={css.mobileLink}
-            href="/nannies"
+            to="/"
+            onClick={() => setOpen(false)}
+          >
+            Home
+          </Link>
+
+          <Link
+            className={css.mobileLink}
+            to="/nannies"
             onClick={() => setOpen(false)}
           >
             Nannies
-          </a>
+          </Link>
 
-          <a
+          <Link
             className={css.mobileLink}
-            href="/favorites"
+            to="/favorites"
             onClick={(e) => {
               if (!user) {
                 e.preventDefault();
@@ -204,7 +208,7 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
             }}
           >
             Favorites
-          </a>
+          </Link>
         </nav>
 
         <div className={css.authMobile}>
