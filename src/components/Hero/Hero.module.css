@@ -10,7 +10,7 @@
 }
 
 .left {
-  background: var(--color-accent-red);
+  background: var(--color-accent-primary);
   display: flex;
   flex-direction: column;
   margin: auto;

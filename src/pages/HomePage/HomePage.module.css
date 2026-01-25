@@ -33,7 +33,7 @@
 
 .bgLeft {
   left: 0;
-  background: var(--color-accent-red);
+  background: var(--color-accent-primary);
 }
 
 .split > *:not(.bgLeft):not(.bgRight) {

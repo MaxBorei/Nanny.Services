@@ -18,7 +18,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid rgba(240, 63, 59, 0.2);
+  border: 2px solid var(--color-border-primary);
   border-radius: var(--radius-30);
   overflow: hidden;
   flex-shrink: 0;

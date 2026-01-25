@@ -36,9 +36,9 @@
   /* Borders */
   --color-border-light: rgba(0, 0, 0, 0.08);
   --color-border-medium: rgba(0, 0, 0, 0.16);
+  --color-border-primary: rgba(240, 63, 59, 0.2);
 
   /* ================= TYPOGRAPHY ================= */
-
   /* Font family */
   --font-family:
     "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -231,4 +231,34 @@
       --fluid-container-pad: 16px;
     }
   }
+}
+
+:root[data-theme="red"] {
+  --color-accent-primary: #f03f3b;
+  --color-text-hover: #f03f3b;
+
+  --color-border-primary: rgba(240, 63, 59, 0.2);
+
+  --btn-bg-primary: var(--color-accent-primary);
+  --btn-bg-primary-hover: #e63236;
+}
+
+:root[data-theme="blue"] {
+  --color-accent-primary: #0857c3;
+  --color-text-hover: #0857c3;
+
+  --color-border-primary: rgba(9, 87, 195, 0.2);
+
+  --btn-bg-primary: var(--color-accent-primary);
+  --btn-bg-primary-hover: #074aa6;
+}
+
+:root[data-theme="green"] {
+  --color-accent-primary: #103931;
+  --color-text-hover: #103931;
+
+  --color-border-primary: rgba(16, 57, 49, 0.2);
+
+  --btn-bg-primary: var(--color-accent-primary);
+  --btn-bg-primary-hover: #0c2b25;
 }

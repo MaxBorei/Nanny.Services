@@ -8,6 +8,8 @@ import { mapNannyFromApi } from "../../utils/mapNannyFromApi";
 import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton";
 import css from "./Favorites.module.css";
 import { Link } from "react-router-dom";
+import Filters from "../../components/Filters/Filters";
+import type { SortValue } from "../../types/Sort";
 
 const LS_KEY = "favorite_nannies";
 const API_URL = import.meta.env.VITE_FIREBASE_API_URL;
@@ -22,6 +24,7 @@ export default function Favorites() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [sort, setSort] = useState<SortValue>("a-z");
 
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
@@ -56,9 +59,35 @@ export default function Favorites() {
     [nannies, favorites],
   );
 
+  const sortedFavorites = useMemo(() => {
+    const arr = [...favoriteCards];
+
+    arr.sort((a, b) => {
+      switch (sort) {
+        case "a-z":
+          return a.name.localeCompare(b.name);
+        case "z-a":
+          return b.name.localeCompare(a.name);
+        case "price-low":
+          return a.pricePerHour - b.pricePerHour;
+        case "price-high":
+          return b.pricePerHour - a.pricePerHour;
+        case "rating-low":
+          return a.rating - b.rating;
+        case "rating-high":
+          return b.rating - a.rating;
+        case "all":
+        default:
+          return 0;
+      }
+    });
+
+    return arr;
+  }, [favoriteCards, sort]);
+
   useEffect(() => {
     setVisibleCount(ITEMS_PER_PAGE);
-  }, [favorites.length]);
+  }, [favorites.length, sort]);
 
   const toggleFavorite = (id: string) => {
     setFavorites((prev) => {
@@ -76,6 +105,10 @@ export default function Favorites() {
       {loading && <Loader />}
       {error && <ErrorView />}
 
+      {!loading && !error && sortedFavorites.length > 0 && (
+        <Filters value={sort} onChange={setSort} />
+      )}
+
       {!loading && !error && favoriteCards.length === 0 && (
         <div className={css.empty}>
           <h2 className={css.emptyTitle}>No favorites yet</h2>
@@ -90,7 +123,7 @@ export default function Favorites() {
 
       {!loading &&
         !error &&
-        favoriteCards
+        sortedFavorites
           .slice(0, visibleCount)
           .map((n) => (
             <NannyCard
@@ -117,7 +150,7 @@ export default function Favorites() {
             />
           ))}
 
-      {!loading && !error && visibleCount < favoriteCards.length && (
+      {!loading && !error && visibleCount < sortedFavorites.length && (
         <LoadMoreButton
           onClick={() => setVisibleCount((p) => p + ITEMS_PER_PAGE)}
         />

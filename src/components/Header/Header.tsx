@@ -17,6 +17,7 @@ import {
 import { notifyLoginRequired } from "../../lib/notify";
 import Loader from "../Loader/Loader";
 import ErrorView from "../ErrorView/ErrorView";
+import ThemeSwitcher from "../ThemeSwitcher/FloatingThemeSwitcher";
 
 type AuthMode = "login" | "register";
 
@@ -339,7 +340,7 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
             )}
           </div>
         </div>
-
+        <ThemeSwitcher />
         <button
           type="button"
           className={css.burger}

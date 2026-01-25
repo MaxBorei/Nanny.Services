@@ -4,8 +4,9 @@ import { NannyCard } from "../../components/NannyCard/NannyCard";
 import Loader from "../../components/Loader/Loader";
 import ErrorView from "../../components/ErrorView/ErrorView";
 import type { Nanny, NannyFromApi } from "../../types/Nannies";
-import Filters, { type SortValue } from "../../components/Filters/Filters";
+import Filters from "../../components/Filters/Filters";
 import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton";
+import type { SortValue } from "../../types/Sort";
 
 const LS_KEY = "favorite_nannies";
 const API_URL = import.meta.env.VITE_FIREBASE_API_URL;

@@ -1,14 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import css from "./Filters.module.css";
-
-export type SortValue =
-  | "all"
-  | "a-z"
-  | "z-a"
-  | "price-low"
-  | "price-high"
-  | "rating-low"
-  | "rating-high";
+import type { SortValue } from "../../types/Sort";
 
 type Option = { value: SortValue; label: string };
 
