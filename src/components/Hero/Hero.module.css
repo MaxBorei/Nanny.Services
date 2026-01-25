@@ -46,6 +46,7 @@
 
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: clamp(var(--sp-8), 1.25vw, var(--sp-20));
 
   border: 1px solid rgba(251, 251, 251, 0.4);
@@ -125,7 +126,7 @@
   justify-content: center;
 
   border-radius: clamp(var(--radius-8), 0.83vw, var(--radius-12));
-  background: var(--color-accent-red);
+  background: var(--color-accent-primary);
   color: var(--color-text-inverse);
   font-weight: var(--fw-bold);
 }

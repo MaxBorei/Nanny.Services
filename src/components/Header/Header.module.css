@@ -209,7 +209,7 @@
 
   display: flex;
   flex-direction: column;
-  gap: var(--sp-20);
+  justify-content: space-between;
 
   box-shadow: -12px 0 40px rgba(0, 0, 0, 0.25);
 }
@@ -341,9 +341,8 @@
 .userBarMobile {
   width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: clamp(var(--sp-8), 2.2vw, var(--sp-16));
+  justify-content: space-around;
   padding: clamp(var(--sp-6), 2vw, var(--sp-10));
 }
 
