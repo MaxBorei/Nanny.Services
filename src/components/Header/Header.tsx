@@ -268,22 +268,22 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
 
         <div className={css.navContainer}>
           <nav className={css.navDesktop} aria-label="Primary">
-            <a className={css.navLink} href="/">
+            <NavLink className={css.navLink} to="/" end>
               Home
-            </a>
+            </NavLink>
 
-            <a
+            <NavLink
               className={css.navLink}
-              href="/nannies"
+              to="/nannies"
               data-active={isNannies ? "true" : undefined}
             >
               Nannies
-            </a>
+            </NavLink>
 
             {showFavorites && (
-              <a
+              <NavLink
                 className={css.navLink}
-                href="/favorites"
+                to="/favorites"
                 data-active={isFavorites ? "true" : undefined}
                 onClick={(e) => {
                   if (!user) {
@@ -294,7 +294,7 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
                 }}
               >
                 Favorites
-              </a>
+              </NavLink>
             )}
           </nav>
 
