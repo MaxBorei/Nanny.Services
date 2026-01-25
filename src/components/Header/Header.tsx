@@ -268,20 +268,20 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
 
         <div className={css.navContainer}>
           <nav className={css.navDesktop} aria-label="Primary">
-            <NavLink className={css.navLink} to="/" end>
+            <Link className={css.navLink} to="/">
               Home
-            </NavLink>
+            </Link>
 
-            <NavLink
+            <Link
               className={css.navLink}
               to="/nannies"
               data-active={isNannies ? "true" : undefined}
             >
               Nannies
-            </NavLink>
+            </Link>
 
             {showFavorites && (
-              <NavLink
+              <Link
                 className={css.navLink}
                 to="/favorites"
                 data-active={isFavorites ? "true" : undefined}
@@ -290,11 +290,12 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
                     e.preventDefault();
                     notifyLoginRequired();
                     openRegister();
+                    return;
                   }
                 }}
               >
                 Favorites
-              </NavLink>
+              </Link>
             )}
           </nav>
 
