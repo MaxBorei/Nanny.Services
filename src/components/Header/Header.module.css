@@ -248,7 +248,7 @@
 .mobileLink {
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
-  font-size: clamp(var(--fs-12), 1.11vw, var(--fs-16));
+  font-size: var(--fs-28);
   line-height: 1.2;
   letter-spacing: var(--ls-tight);
 
@@ -349,7 +349,7 @@
 .userNameMobile {
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
-  font-size: clamp(var(--fs-12), 3.2vw, var(--fs-16));
+  font-size: var(--fs-20);
   line-height: 1.2;
   letter-spacing: var(--ls-tight);
   color: rgba(17, 16, 28, 0.9);
@@ -368,7 +368,7 @@
 
   font-family: var(--font-family);
   font-weight: var(--fw-medium);
-  font-size: clamp(var(--fs-12), 3vw, var(--fs-14));
+  font-size: var(--fs-16);
   line-height: 1;
   letter-spacing: var(--ls-ltight);
 
