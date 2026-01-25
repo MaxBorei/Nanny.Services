@@ -1,5 +1,4 @@
 .section {
-  padding: 0 var(--fluid-container-pad);
   margin-top: clamp(48px, 6vw, 64px);
   margin-bottom: var(--sp-32);
 }
