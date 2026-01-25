@@ -2,7 +2,6 @@
   min-height: calc(100dvh - var(--header-height, 73px));
   background: var(--inputs);
   color: var(--main);
-
   display: grid;
   place-items: center;
 
