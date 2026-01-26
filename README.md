@@ -50,11 +50,6 @@ cp .env.example .env
 # Fill in: BASE_URL, etc.
 ```
 
-```bash
-# Upstream API base used by Next.js Route Handlers when fetching external data
-BASE_URL=https://66b1f8e71ca8ad33d4f5f63e.mockapi.io
-```
-
 Then, run the development server:
 
 ```bash
