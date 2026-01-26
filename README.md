@@ -7,6 +7,7 @@ This is a React project bootstrapped with Vite.
 
 Tech stack:
 ###
+
 <li> React,
 <li> TypeScript,
 <li> Vite,
