@@ -5,13 +5,13 @@ Routing is handled with React Router. Forms use react-hook-form + Yup validation
 
 This is a React project bootstrapped with Vite.
 
-<li> Tech stack:
+Tech stack:
 ###
-*React,
-*TypeScript,
-*Vite,
-*React Router — routing, protected pages, 404 fallback,
-*react-hook-form — form state + performance,
-*Yup + @hookform/resolvers — schema validation,
-*Framer Motion — UI animations,
-*CSS Modules — component styles.
+<li> React,
+<li> TypeScript,
+<li> Vite,
+<li> React Router — routing, protected pages, 404 fallback,
+<li> react-hook-form — form state + performance,
+<li> Yup + @hookform/resolvers — schema validation,
+<li> Framer Motion — UI animations,
+<li> CSS Modules — component styles.
