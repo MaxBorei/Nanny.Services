@@ -11,6 +11,7 @@ type ErrorViewProps = {
   message?: string;
   homeHref?: string;
   reset?: () => void;
+  variant?: "page" | "inline";
 };
 
 export default function ErrorView({
@@ -19,40 +20,56 @@ export default function ErrorView({
   message = "Вибачте, сторінка недоступна чи переміщена.",
   homeHref = "/",
   reset,
+  variant = "page",
 }: ErrorViewProps) {
   const navigate = useNavigate();
+  const isInline = variant === "inline";
 
   const handleBack = () => navigate(homeHref);
-  const handleRetry = () => {
-    reset?.();
-  };
+  const handleRetry = () => reset?.();
 
   return (
-    <div className={css.wrapper} aria-live="polite">
+    <div
+      className={isInline ? css.inlineWrapper : css.wrapper}
+      aria-live="polite"
+    >
       <motion.div
         initial={{ y: 18, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 110, damping: 16 }}
-        className={css.card}
+        className={isInline ? css.inlineCard : css.card}
       >
-        <motion.div
-          className={css.illu}
-          initial={{ scale: 0.95, rotate: -2, opacity: 0 }}
-          animate={{ scale: 1, rotate: 0, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 120 }}
-          aria-hidden="true"
-        >
-          <Logo />
-        </motion.div>
+        {!isInline && (
+          <motion.div
+            className={css.illu}
+            initial={{ scale: 0.95, rotate: -2, opacity: 0 }}
+            animate={{ scale: 1, rotate: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 120 }}
+            aria-hidden="true"
+          >
+            <Logo />
+          </motion.div>
+        )}
 
-        <motion.h1
-          initial={{ scale: 0.96, opacity: 0 }}
-          animate={{ scale: 1.02, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 120 }}
-          className={css.code}
-        >
-          {code} — {title}
-        </motion.h1>
+        {!isInline ? (
+          <motion.h1
+            initial={{ scale: 0.96, opacity: 0 }}
+            animate={{ scale: 1.02, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 120 }}
+            className={css.code}
+          >
+            {code} — {title}
+          </motion.h1>
+        ) : (
+          <motion.strong
+            initial={{ y: 6, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 140, damping: 18 }}
+            className={css.inlineTitle}
+          >
+            {title}
+          </motion.strong>
+        )}
 
         <motion.p
           initial={{ y: 8, opacity: 0 }}
@@ -69,14 +86,16 @@ export default function ErrorView({
           transition={{ delay: 0.22 }}
           className={css.actions}
         >
-          <button
-            type="button"
-            className={`${css.button} ${css.primary}`}
-            onClick={handleBack}
-          >
-            <MdHome size={20} />
-            На головну
-          </button>
+          {!isInline && (
+            <button
+              type="button"
+              className={`${css.button} ${css.primary}`}
+              onClick={handleBack}
+            >
+              <MdHome size={20} />
+              На головну
+            </button>
+          )}
 
           {reset && (
             <button

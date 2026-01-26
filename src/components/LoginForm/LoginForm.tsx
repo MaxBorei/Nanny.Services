@@ -1,45 +1,83 @@
 import css from "./LoginForm.module.css";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "../../schemas/loginSchema";
+import ErrorView from "../ErrorView/ErrorView";
+
+type FormValues = {
+  email: string;
+  password: string;
+};
 
 type LoginFormProps = {
-  onSubmit: (data: { email: string; password: string }) => void;
+  onSubmit: (data: FormValues) => Promise<void> | void;
 };
 
 export function LoginForm({ onSubmit }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
 
-    onSubmit({
-      email: String(formData.get("email") || ""),
-      password: String(formData.get("password") || ""),
-    });
+  const {
+    register,
+    handleSubmit,
+    setError,
+    clearErrors,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: yupResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const handleFormSubmit = async (data: FormValues) => {
+    clearErrors("root");
+
+    try {
+      await onSubmit(data);
+    } catch {
+      // ❗ серверна помилка (невірний email/пароль)
+      setError("root", {
+        type: "server",
+        message: "Невірний email або пароль",
+      });
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="on">
+    <form onSubmit={handleSubmit(handleFormSubmit)} autoComplete="on">
       <div className={css.form}>
-        <input
-          className={css.input}
-          name="email"
-          type="email"
-          placeholder="Email"
-          required
-          autoComplete="email"
-          inputMode="email"
-          spellCheck={false}
-          autoCapitalize="none"
-        />
+        {errors.root?.message && (
+          <ErrorView
+            variant="inline"
+            title="Помилка входу"
+            message={errors.root.message}
+          />
+        )}
+
+        <div>
+          <input
+            className={css.input}
+            type="email"
+            placeholder="Email"
+            autoComplete="email"
+            inputMode="email"
+            spellCheck={false}
+            autoCapitalize="none"
+            {...register("email")}
+          />
+          {errors.email && <p className={css.error}>{errors.email.message}</p>}
+        </div>
+
         <div className={css.field}>
           <input
             className={`${css.input} ${css.inputWithIcon}`}
-            name="password"
             type={showPassword ? "text" : "password"}
             placeholder="Password"
-            required
+            {...register("password")}
           />
+
           <button
             type="button"
             className={css.iconBtn}
@@ -53,9 +91,13 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
             </svg>
           </button>
         </div>
+
+        {errors.password && (
+          <p className={css.error}>{errors.password.message}</p>
+        )}
       </div>
 
-      <button className={css.submit} type="submit">
+      <button className={css.submit} type="submit" disabled={isSubmitting}>
         Log In
       </button>
     </form>

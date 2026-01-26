@@ -1,6 +1,9 @@
-import { useState } from "react";
 import css from "./AppointmentForm.module.css";
 import TimePicker from "../TimePicker/TimePicker";
+import { useMemo } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { appointmentSchema } from "../../schemas/appointmentSchema";
 
 type AppointmentFormProps = {
   nannyName: string;
@@ -8,7 +11,7 @@ type AppointmentFormProps = {
   onClose: () => void;
 };
 
-type FormState = {
+type FormValues = {
   address: string;
   phone: string;
   childAge: string;
@@ -18,44 +21,40 @@ type FormState = {
   comment: string;
 };
 
-const initialState: FormState = {
-  address: "",
-  phone: "+380",
-  childAge: "",
-  time: "09:00",
-  email: "",
-  parentsName: "",
-  comment: "",
-};
-
 export default function AppointmentForm({
   nannyName,
   avatar_url,
   onClose,
 }: AppointmentFormProps) {
-  const [values, setValues] = useState<FormState>(initialState);
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const defaultValues = useMemo<FormValues>(
+    () => ({
+      address: "",
+      phone: "+380",
+      childAge: "",
+      time: "09:00",
+      email: "",
+      parentsName: "",
+      comment: "",
+    }),
+    [],
+  );
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setValues((p) => ({ ...p, [name]: value }));
-  };
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: yupResolver(appointmentSchema),
+    defaultValues,
+    mode: "onSubmit",
+  });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      setIsSubmitting(true);
-
-      await new Promise((r) => setTimeout(r, 600));
-
-      onClose();
-      setValues(initialState);
-    } finally {
-      setIsSubmitting(false);
-    }
+  const onSubmit = async () => {
+    await new Promise((r) => setTimeout(r, 600));
+    onClose();
+    reset(defaultValues);
   };
 
   return (
@@ -77,75 +76,105 @@ export default function AppointmentForm({
         </div>
       </div>
 
-      <form className={css.form} onSubmit={handleSubmit}>
+      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.row2}>
-          <input
-            className={css.input}
-            name="address"
-            placeholder="Address"
-            value={values.address}
-            onChange={handleChange}
-            disabled={isSubmitting}
-          />
-          <input
-            className={css.input}
-            name="phone"
-            placeholder="+380"
-            value={values.phone}
-            onChange={handleChange}
-            disabled={isSubmitting}
-          />
+          <div>
+            <input
+              className={css.input}
+              placeholder="Address"
+              disabled={isSubmitting}
+              {...register("address")}
+            />
+            {errors.address && (
+              <p className={css.error}>{errors.address.message}</p>
+            )}
+          </div>
+
+          <div>
+            <input
+              className={css.input}
+              placeholder="+380"
+              disabled={isSubmitting}
+              {...register("phone")}
+            />
+            {errors.phone && (
+              <p className={css.error}>{errors.phone.message}</p>
+            )}
+          </div>
         </div>
 
         <div className={css.row2}>
-          <input
-            className={css.input}
-            name="childAge"
-            placeholder="Child's age"
-            value={values.childAge}
-            onChange={handleChange}
-            disabled={isSubmitting}
-          />
-          <TimePicker
-            value={values.time}
-            onChange={(t) => setValues((p) => ({ ...p, time: t }))}
-            disabled={isSubmitting}
-            start="08:00"
-            end="20:00"
-            stepMinutes={30}
-            placeholder="00:00"
-          />
+          <div>
+            <input
+              className={css.input}
+              placeholder="Child's age"
+              disabled={isSubmitting}
+              {...register("childAge")}
+            />
+            {errors.childAge && (
+              <p className={css.error}>{errors.childAge.message}</p>
+            )}
+          </div>
+
+          <div>
+            <Controller
+              name="time"
+              control={control}
+              render={({ field }) => (
+                <TimePicker
+                  value={field.value}
+                  onChange={field.onChange}
+                  disabled={isSubmitting}
+                  start="08:00"
+                  end="20:00"
+                  stepMinutes={30}
+                  placeholder="00:00"
+                />
+              )}
+            />
+            {errors.time && <p className={css.error}>{errors.time.message}</p>}
+          </div>
         </div>
 
-        <input
-          className={css.input}
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={values.email}
-          onChange={handleChange}
-          disabled={isSubmitting}
-          required
-        />
+        <div>
+          <input
+            className={css.input}
+            type="email"
+            placeholder="Email"
+            disabled={isSubmitting}
+            autoComplete="email"
+            inputMode="email"
+            spellCheck={false}
+            autoCapitalize="none"
+            {...register("email")}
+          />
+          {errors.email && <p className={css.error}>{errors.email.message}</p>}
+        </div>
 
-        <input
-          className={css.input}
-          name="parentsName"
-          placeholder="Father's or mother's name"
-          value={values.parentsName}
-          onChange={handleChange}
-          disabled={isSubmitting}
-        />
+        <div>
+          <input
+            className={css.input}
+            placeholder="Father's or mother's name"
+            disabled={isSubmitting}
+            {...register("parentsName")}
+          />
+          {errors.parentsName && (
+            <p className={css.error}>{errors.parentsName.message}</p>
+          )}
+        </div>
 
-        <textarea
-          className={css.textarea}
-          name="comment"
-          placeholder="Comment"
-          rows={4}
-          value={values.comment}
-          onChange={handleChange}
-          disabled={isSubmitting}
-        />
+        <div>
+          <textarea
+            className={css.textarea}
+            placeholder="Comment"
+            rows={4}
+            disabled={isSubmitting}
+            {...register("comment")}
+          />
+          {errors.comment && (
+            <p className={css.error}>{errors.comment.message}</p>
+          )}
+        </div>
 
         <button className={css.submit} type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Sending..." : "Send"}
