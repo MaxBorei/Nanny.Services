@@ -115,9 +115,13 @@ If you deploy to Netlify/Vercel/GitHub Pages and you need a ready config (redire
 
 ## Screenshots
 
-### Home page
+### Home page - three color themes
 
-![Home page](screenshots/home.png)
+![Home page](screenshots/home_blue.png)
+
+![Home page](screenshots/home_green.png)
+
+![Home page](screenshots/home_red.png)
 
 ### Nannies catalog
 
