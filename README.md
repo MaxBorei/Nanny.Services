@@ -1,12 +1,11 @@
-Nanny.Services — Babysitter Marketplace (React + Vite)
-=====================
+# Nanny.Services — Babysitter Marketplace (React + Vite)
+
 A babysitter catalog with authentication, protected favorites, and appointment booking via modal forms.
 Routing is handled with React Router. Forms use react-hook-form + Yup validation. UI includes reusable modal and error components (page / inline), animations via Framer Motion, and styling via CSS Modules.
 
 This is a React project bootstrapped with Vite.
 
-Tech stack:
------------------------------------
+## Tech stack:
 
 <li> React,
 <li> TypeScript,
@@ -17,8 +16,7 @@ Tech stack:
 <li> Framer Motion — UI animations,
 <li> CSS Modules — component styles.
 
-Features:
------------------------------------
+## Features:
 
 <li>Nannies catalog page;
 <li>Favorites page доступна лише авторизованим користувачам (ProtectedRoute);
@@ -41,6 +39,7 @@ pnpm i
 # or
 bun install
 ```
+
 Environment variables
 
 Configure your environment variables:
@@ -61,6 +60,7 @@ pnpm dev
 # or
 bun dev
 ```
+
 Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
 
 To build the project:
@@ -75,8 +75,8 @@ To preview the production build locally:
 npm run preview
 ```
 
-Project Structure
------------------------------------
+## Project Structure
+
 Key folders and files:
 
 <li>src/routes/AppRoutes.tsx — routes (/, /nannies, /favorites, 404)
@@ -84,16 +84,16 @@ Key folders and files:
 <li>src/components — Modal, LoginForm, RegisterForm, AppointmentForm, TimePicker, ErrorView, ProtectedRoute
 <li>src/schemas — loginSchema, registerSchema, appointmentSchema
 
-Routing
------------------------------------
+## Routing
+
 Routes:
 
 <li>/ — HomePage
 <li>/nannies — Nannies catalog
 <li>/favorites — Favorites (ProtectedRoute)
 
-Forms & Validation
------------------------------------
+## Forms & Validation
+
 Validation schemas:
 
 <li>src/schemas/loginSchema.ts
@@ -111,3 +111,21 @@ SPA Deployment Notes
 This project is an SPA. For correct routing on production hosting, configure fallback to index.html for all routes (so refreshing /nannies or /favorites doesn’t return a 404 from the hosting provider).
 
 If you deploy to Netlify/Vercel/GitHub Pages and you need a ready config (redirects / basename), tell me which platform you use and I’ll generate the exact files.
+
+## Screenshots
+
+### Home page
+
+![Home page](screenshots/home.png)
+
+### Nannies catalog
+
+![Nannies catalog](screenshots/nannies.png)
+
+### Login modal
+
+![Login modal](screenshots/login-modal.png)
+
+### Nanny card
+
+![Nanny card](screenshots/NannyCard.png)
