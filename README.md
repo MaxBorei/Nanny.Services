@@ -6,7 +6,7 @@ Routing is handled with React Router. Forms use react-hook-form + Yup validation
 This is a React project bootstrapped with Vite.
 
 Tech stack:
-###
+-----------------------------------
 
 <li> React,
 <li> TypeScript,
