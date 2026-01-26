@@ -91,13 +91,13 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 48px;
+  gap: clamp(var(--sp-12), 3.33vw, var(--sp-48));
 }
 
 .metaItem {
   display: inline-flex;
   align-items: center;
-  gap: var(--sp-4);
+  gap: clamp();
   max-width: 100%;
   position: relative;
   min-width: 0;
@@ -383,6 +383,10 @@
   .meta {
     gap: var(--sp-16);
   }
+
+  /* .meta_favorite {
+  gap: 48px;
+} */
 
   .metaItem:not(:last-child)::after {
     display: none;
