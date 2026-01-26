@@ -16,3 +16,14 @@ Tech stack:
 <li> Yup + @hookform/resolvers — schema validation,
 <li> Framer Motion — UI animations,
 <li> CSS Modules — component styles.
+
+Features:
+-----------------------------------
+
+<li>Nannies catalog page;
+<li>Favorites page доступна лише авторизованим користувачам (ProtectedRoute);
+<li>Modal windows: Login, Registration, Appointment;
+<li>Validated forms (loginSchema / registerSchema / appointmentSchema);
+<li>Appointment form includes custom TimePicker (Controller integration);
+<li>ErrorView supports page mode (404) and inline mode (form errors);
+<li>Responsive layout and clean UI components.
