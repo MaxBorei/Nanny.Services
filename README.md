@@ -27,3 +27,92 @@ Features:
 <li>Appointment form includes custom TimePicker (Controller integration);
 <li>ErrorView supports page mode (404) and inline mode (form errors);
 <li>Responsive layout and clean UI components.
+
+## Getting Started
+
+First, install dependencies:
+
+```bash
+npm i
+# or
+yarn
+# or
+pnpm i
+# or
+bun install
+```
+Environment variables
+
+Configure your environment variables:
+
+```bash
+cp .env.example .env
+# Fill in: BASE_URL, etc.
+```
+
+```bash
+# Upstream API base used by Next.js Route Handlers when fetching external data
+BASE_URL=https://66b1f8e71ca8ad33d4f5f63e.mockapi.io
+```
+
+Then, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
+
+To build the project:
+
+```bash
+npm run build
+```
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+Project Structure
+-----------------------------------
+Key folders and files:
+
+<li>src/routes/AppRoutes.tsx — routes (/, /nannies, /favorites, 404)
+<li>src/pages — HomePage, Nannies, Favorites
+<li>src/components — Modal, LoginForm, RegisterForm, AppointmentForm, TimePicker, ErrorView, ProtectedRoute
+<li>src/schemas — loginSchema, registerSchema, appointmentSchema
+
+Routing
+-----------------------------------
+Routes:
+
+<li>/ — HomePage
+<li>/nannies — Nannies catalog
+<li>/favorites — Favorites (ProtectedRoute)
+
+Forms & Validation
+-----------------------------------
+Validation schemas:
+
+<li>src/schemas/loginSchema.ts
+<li>src/schemas/registerSchema.ts
+<li>src/schemas/appointmentSchema.ts
+
+Forms:
+
+<li>LoginForm — email + password
+<li>RegisterForm — name + email + password
+<li>AppointmentForm — address, phone, childAge, time (TimePicker), email, parentsName, comment
+
+SPA Deployment Notes
+
+This project is an SPA. For correct routing on production hosting, configure fallback to index.html for all routes (so refreshing /nannies or /favorites doesn’t return a 404 from the hosting provider).
+
+If you deploy to Netlify/Vercel/GitHub Pages and you need a ready config (redirects / basename), tell me which platform you use and I’ll generate the exact files.
