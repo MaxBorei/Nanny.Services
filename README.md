@@ -1,4 +1,3 @@
-=====================
 Nanny.Services — Babysitter Marketplace (React + Vite)
 ---
 A babysitter catalog with authentication, protected favorites, and appointment booking via modal forms.
