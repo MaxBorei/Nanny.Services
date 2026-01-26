@@ -43,26 +43,29 @@ export default function Modal({
       role="dialog"
       aria-modal="true"
     >
-      <div className={css.modal} onClick={(e) => e.stopPropagation()}>
-        <button
-          className={css.closeBtn}
-          type="button"
-          onClick={onClose}
-          aria-label="Close"
-        >
-          ✕
-        </button>
+      <div className={css.scaleWrap}>
+        <div className={css.modal} onClick={(e) => e.stopPropagation()}>
+          <button
+            type="button"
+            className={css.closeBtn}
+            onClick={onClose}
+            aria-label="Close"
+          >
+            <svg className={css.closeIcon} aria-hidden="true">
+              <use href="/vite.svg#icon-close" />
+            </svg>
+          </button>
 
-        {(title || description) && (
-          <div className={css.textContainer}>
-            {title && <h2 className={css.title}>{title}</h2>}
-            {description && <p className={css.description}>{description}</p>}
-          </div>
-        )}
-
-        {children}
+          {(title || description) && (
+            <div className={css.textContainer}>
+              {title && <h2 className={css.title}>{title}</h2>}
+              {description && <p className={css.description}>{description}</p>}
+            </div>
+          )}
+          {children}
+        </div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }

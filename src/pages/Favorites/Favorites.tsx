@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import Header from "../../components/Header/Header";
+// import Header from "../../components/Header/Header";
 import { NannyCard } from "../../components/NannyCard/NannyCard";
 import Loader from "../../components/Loader/Loader";
 import ErrorView from "../../components/ErrorView/ErrorView";
@@ -10,6 +10,8 @@ import css from "./Favorites.module.css";
 import { Link } from "react-router-dom";
 import Filters from "../../components/Filters/Filters";
 import type { SortValue } from "../../types/Sort";
+import Header from "../../components/Header/Header";
+import Container from "../../components/Container/Container";
 
 const LS_KEY = "favorite_nannies";
 const API_URL = import.meta.env.VITE_FIREBASE_API_URL;
@@ -101,60 +103,57 @@ export default function Favorites() {
   return (
     <>
       <Header variant="solid" />
-
-      {loading && <Loader />}
-      {error && <ErrorView />}
-
-      {!loading && !error && sortedFavorites.length > 0 && (
-        <Filters value={sort} onChange={setSort} />
-      )}
-
-      {!loading && !error && favoriteCards.length === 0 && (
-        <div className={css.empty}>
-          <h2 className={css.emptyTitle}>No favorites yet</h2>
-          <p className={css.emptyText}>
-            Tap the heart on a nanny card to add it here.
-          </p>
-          <Link className={css.emptyBtn} to="/nannies">
-            Browse nannies
-          </Link>
-        </div>
-      )}
-
-      {!loading &&
-        !error &&
-        sortedFavorites
-          .slice(0, visibleCount)
-          .map((n) => (
-            <NannyCard
-              key={n.id}
-              avatarUrl={n.avatarUrl}
-              isOnline
-              name={n.name}
-              location={n.location}
-              rating={n.rating}
-              pricePerHour={n.pricePerHour}
-              age={n.age}
-              experienceYears={n.experienceYears}
-              kidsAgeRange={n.kidsAgeRange}
-              characters={n.characters}
-              education={n.education}
-              about={n.about}
-              reviews={n.reviews ?? []}
-              isExpanded={expandedId === n.id}
-              isFavorite
-              onToggleFavorite={() => toggleFavorite(n.id)}
-              onToggleReadMore={() =>
-                setExpandedId((prev) => (prev === n.id ? null : n.id))
-              }
-            />
-          ))}
-
-      {!loading && !error && visibleCount < sortedFavorites.length && (
-        <LoadMoreButton
-          onClick={() => setVisibleCount((p) => p + ITEMS_PER_PAGE)}
-        />
-      )}
+      <Container>
+        {loading && <Loader />}
+        {error && <ErrorView />}
+        {!loading && !error && sortedFavorites.length > 0 && (
+          <Filters value={sort} onChange={setSort} />
+        )}
+        {!loading && !error && favoriteCards.length === 0 && (
+          <div className={css.empty}>
+            <h2 className={css.emptyTitle}>No favorites yet</h2>
+            <p className={css.emptyText}>
+              Tap the heart on a nanny card to add it here.
+            </p>
+            <Link className={css.emptyBtn} to="/nannies">
+              Browse nannies
+            </Link>
+          </div>
+        )}
+        {!loading &&
+          !error &&
+          sortedFavorites
+            .slice(0, visibleCount)
+            .map((n) => (
+              <NannyCard
+                key={n.id}
+                avatarUrl={n.avatarUrl}
+                isOnline
+                name={n.name}
+                location={n.location}
+                rating={n.rating}
+                pricePerHour={n.pricePerHour}
+                age={n.age}
+                experienceYears={n.experienceYears}
+                kidsAgeRange={n.kidsAgeRange}
+                characters={n.characters}
+                education={n.education}
+                about={n.about}
+                reviews={n.reviews ?? []}
+                isExpanded={expandedId === n.id}
+                isFavorite
+                onToggleFavorite={() => toggleFavorite(n.id)}
+                onToggleReadMore={() =>
+                  setExpandedId((prev) => (prev === n.id ? null : n.id))
+                }
+              />
+            ))}
+        {!loading && !error && visibleCount < sortedFavorites.length && (
+          <LoadMoreButton
+            onClick={() => setVisibleCount((p) => p + ITEMS_PER_PAGE)}
+          />
+        )}
+      </Container>
     </>
   );
 }

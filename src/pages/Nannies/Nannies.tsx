@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import Header from "../../components/Header/Header";
+// import Header from "../../components/Header/Header";
 import { NannyCard } from "../../components/NannyCard/NannyCard";
 import Loader from "../../components/Loader/Loader";
 import ErrorView from "../../components/ErrorView/ErrorView";
@@ -7,6 +7,8 @@ import type { Nanny, NannyFromApi } from "../../types/Nannies";
 import Filters from "../../components/Filters/Filters";
 import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton";
 import type { SortValue } from "../../types/Sort";
+import Header from "../../components/Header/Header";
+import Container from "../../components/Container/Container";
 
 const LS_KEY = "favorite_nannies";
 const API_URL = import.meta.env.VITE_FIREBASE_API_URL;
@@ -144,49 +146,46 @@ export default function Nannies() {
   return (
     <>
       <Header variant="solid" />
-
-      {loading && <Loader />}
-      {error && <ErrorView />}
-
-      <Filters value={sort} onChange={setSort} />
-
-      {!loading &&
-        !error &&
-        cards.slice(0, visibleCount).map((n) => {
-          const isFavorite = favorites.includes(n.id);
-          const isExpanded = expandedId === n.id;
-
-          return (
-            <NannyCard
-              key={n.id}
-              avatarUrl={n.avatarUrl}
-              isOnline={true}
-              name={n.name}
-              location={n.location}
-              rating={n.rating}
-              pricePerHour={n.pricePerHour}
-              age={calcAge(n.birthday) ?? 0}
-              experienceYears={parseExperienceYears(n.experience) ?? 0}
-              kidsAgeRange={n.kidsAgeRange}
-              characters={(n.characters || []).map(
-                (c) => c.charAt(0).toUpperCase() + c.slice(1),
-              )}
-              education={n.education}
-              about={n.about}
-              reviews={n.reviews ?? []}
-              isExpanded={isExpanded}
-              isFavorite={isFavorite}
-              onToggleFavorite={() => toggleFavorite(n.id)}
-              onToggleReadMore={() => toggleExpanded(n.id)}
-            />
-          );
-        })}
-
-      {!loading && !error && visibleCount < cards.length && (
-        <LoadMoreButton
-          onClick={() => setVisibleCount((p) => p + ITEMS_PER_PAGE)}
-        />
-      )}
+      <Container>
+        {loading && <Loader />}
+        {error && <ErrorView />}
+        <Filters value={sort} onChange={setSort} />
+        {!loading &&
+          !error &&
+          cards.slice(0, visibleCount).map((n) => {
+            const isFavorite = favorites.includes(n.id);
+            const isExpanded = expandedId === n.id;
+            return (
+              <NannyCard
+                key={n.id}
+                avatarUrl={n.avatarUrl}
+                isOnline={true}
+                name={n.name}
+                location={n.location}
+                rating={n.rating}
+                pricePerHour={n.pricePerHour}
+                age={calcAge(n.birthday) ?? 0}
+                experienceYears={parseExperienceYears(n.experience) ?? 0}
+                kidsAgeRange={n.kidsAgeRange}
+                characters={(n.characters || []).map(
+                  (c) => c.charAt(0).toUpperCase() + c.slice(1),
+                )}
+                education={n.education}
+                about={n.about}
+                reviews={n.reviews ?? []}
+                isExpanded={isExpanded}
+                isFavorite={isFavorite}
+                onToggleFavorite={() => toggleFavorite(n.id)}
+                onToggleReadMore={() => toggleExpanded(n.id)}
+              />
+            );
+          })}
+        {!loading && !error && visibleCount < cards.length && (
+          <LoadMoreButton
+            onClick={() => setVisibleCount((p) => p + ITEMS_PER_PAGE)}
+          />
+        )}
+      </Container>
     </>
   );
 }
