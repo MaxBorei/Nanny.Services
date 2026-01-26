@@ -24,7 +24,8 @@ This is a React project bootstrapped with Vite.
 <li>Validated forms (loginSchema / registerSchema / appointmentSchema);
 <li>Appointment form includes custom TimePicker (Controller integration);
 <li>ErrorView supports page mode (404) and inline mode (form errors);
-<li>Responsive layout and clean UI components.
+<li>Responsive layout and clean UI components;
+<li>Three color themes with runtime switching.
 
 ## Getting Started
 
