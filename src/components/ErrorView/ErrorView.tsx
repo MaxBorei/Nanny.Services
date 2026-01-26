@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { MdHome, MdRefresh } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Logo from "../Logo/Logo";
 import css from "./ErrorView.module.css";
@@ -22,11 +22,7 @@ export default function ErrorView({
   reset,
   variant = "page",
 }: ErrorViewProps) {
-  const navigate = useNavigate();
   const isInline = variant === "inline";
-
-  const handleBack = () => navigate(homeHref);
-  const handleRetry = () => reset?.();
 
   return (
     <div
@@ -87,21 +83,21 @@ export default function ErrorView({
           className={css.actions}
         >
           {!isInline && (
-            <button
-              type="button"
+            <Link
+              to={homeHref}
               className={`${css.button} ${css.primary}`}
-              onClick={handleBack}
+              aria-label="На головну"
             >
               <MdHome size={20} />
               На головну
-            </button>
+            </Link>
           )}
 
           {reset && (
             <button
               type="button"
               className={`${css.button} ${css.ghost}`}
-              onClick={handleRetry}
+              onClick={reset}
             >
               <MdRefresh size={20} />
               Спробувати ще раз
