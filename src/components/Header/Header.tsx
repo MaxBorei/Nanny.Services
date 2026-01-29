@@ -19,7 +19,7 @@ import Loader from "../Loader/Loader";
 import ErrorView from "../ErrorView/ErrorView";
 import ThemeSwitcher from "../ThemeSwitcher/FloatingThemeSwitcher";
 
-type AuthMode = "login" | "register";
+export type AuthMode = "login" | "register";
 
 type HeaderProps = {
   variant?: "transparent" | "solid";

@@ -1,5 +1,9 @@
-import { Notify } from "notiflix/build/notiflix-notify-aio";
+import { toast } from "react-hot-toast";
 
-export function notifyLoginRequired(): void {
-  Notify.info("This feature is available only for logged-in users");
-}
+export const notifyLoginRequired = () => {
+  toast.error("Please register or login to continue");
+};
+
+export const notifySuccess = (message: string) => {
+  toast.success(message);
+};

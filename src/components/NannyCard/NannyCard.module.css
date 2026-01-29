@@ -348,6 +348,12 @@
   transition: all var(--transition-fast);
 }
 
+.favBtn:disabled,
+.appointmentBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 @media (max-width: 900px) {
   .card {
     gap: var(--sp-12);

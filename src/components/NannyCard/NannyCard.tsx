@@ -3,6 +3,7 @@ import type { Review } from "../../types/Nannies";
 import Modal from "../Modal/Modal";
 import css from "./NannyCard.module.css";
 import AppointmentForm from "../AppointmentForm/AppointmentForm";
+import { useAuthUser } from "../../lib/authApi";
 
 type NannyCardProps = {
   avatarUrl: string;
@@ -68,7 +69,7 @@ export function NannyCard({
 
   const openModal = () => setIsAppointment(true);
   const closeModal = () => setIsAppointment(false);
-
+  const { user } = useAuthUser();
   return (
     <section className={css.card} aria-label={`${role}: ${name}`}>
       <div className={css.avatar}>
@@ -117,9 +118,14 @@ export function NannyCard({
               className={css.favBtn}
               aria-pressed={isFavorite}
               aria-label={
-                isFavorite ? "Remove from favorites" : "Add to favorites"
+                user
+                  ? isFavorite
+                    ? "Remove from favorites"
+                    : "Add to favorites"
+                  : "Login required"
               }
-              onClick={onToggleFavorite}
+              disabled={!user}
+              onClick={() => onToggleFavorite?.()}
             >
               <svg
                 className={`${css.favIcon} ${
@@ -220,6 +226,8 @@ export function NannyCard({
             <button
               type="button"
               className={css.appointmentBtn}
+              disabled={!user}
+              aria-label={user ? "Make an appointment" : "Login required"}
               onClick={openModal}
             >
               Make an appointment

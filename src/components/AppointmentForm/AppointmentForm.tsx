@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { appointmentSchema } from "../../schemas/appointmentSchema";
+import { notifySuccess } from "../../lib/notify";
 
 type AppointmentFormProps = {
   nannyName: string;
@@ -53,6 +54,9 @@ export default function AppointmentForm({
 
   const onSubmit = async () => {
     await new Promise((r) => setTimeout(r, 600));
+
+    notifySuccess("Appointment successfully created 🎉");
+
     onClose();
     reset(defaultValues);
   };
