@@ -9,8 +9,9 @@ import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton";
 import type { SortValue } from "../../types/Sort";
 import Header from "../../components/Header/Header";
 import Container from "../../components/Container/Container";
+import { useAuthUser } from "../../lib/authApi";
 
-const LS_KEY = "favorite_nannies";
+const getFavoritesKey = (uid: string) => `favorites:${uid}`;
 const API_URL = import.meta.env.VITE_FIREBASE_API_URL;
 
 type NanniesResponse = Record<string, NannyFromApi>;
@@ -36,15 +37,25 @@ export default function Nannies() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
+  const { user } = useAuthUser();
+  const uid = user?.uid;
+
+  const [favorites, setFavorites] = useState<string[]>([]);
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
-  const [favorites, setFavorites] = useState<string[]>(() => {
-    try {
-      return JSON.parse(localStorage.getItem(LS_KEY) || "[]") as string[];
-    } catch {
-      return [];
+  useEffect(() => {
+    if (!uid) {
+      setFavorites([]);
+      return;
     }
-  });
+
+    try {
+      const stored = localStorage.getItem(getFavoritesKey(uid));
+      setFavorites(stored ? JSON.parse(stored) : []);
+    } catch {
+      setFavorites([]);
+    }
+  }, [uid]);
 
   const [sort, setSort] = useState<SortValue>("a-z");
   const ITEMS_PER_PAGE = 3;
@@ -54,14 +65,18 @@ export default function Nannies() {
     setVisibleCount(ITEMS_PER_PAGE);
   }, [sort]);
 
-  useEffect(() => {
-    localStorage.setItem(LS_KEY, JSON.stringify(favorites));
-  }, [favorites]);
+  const toggleFavorite = (nannyId: string) => {
+    if (!uid) return;
 
-  const toggleFavorite = (id: string) => {
-    setFavorites((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
-    );
+    setFavorites((prev) => {
+      const next = prev.includes(nannyId)
+        ? prev.filter((id) => id !== nannyId)
+        : [...prev, nannyId];
+
+      localStorage.setItem(getFavoritesKey(uid), JSON.stringify(next));
+
+      return next;
+    });
   };
 
   const toggleExpanded = (id: string) => {

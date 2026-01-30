@@ -12,8 +12,9 @@ import Filters from "../../components/Filters/Filters";
 import type { SortValue } from "../../types/Sort";
 import Header from "../../components/Header/Header";
 import Container from "../../components/Container/Container";
+import { useAuthUser } from "../../lib/authApi";
 
-const LS_KEY = "favorite_nannies";
+const getLSKey = (uid: string) => `favorites:${uid}`;
 const API_URL = import.meta.env.VITE_FIREBASE_API_URL;
 
 type NanniesResponse = Record<string, NannyFromApi>;
@@ -27,12 +28,22 @@ export default function Favorites() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [sort, setSort] = useState<SortValue>("a-z");
-
+  const { user } = useAuthUser();
+  const uid = user?.uid;
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
   useEffect(() => {
-    setFavorites(JSON.parse(localStorage.getItem(LS_KEY) || "[]"));
-  }, []);
+    if (!uid) {
+      setFavorites([]); // logout -> очищаем
+      return;
+    }
+
+    try {
+      setFavorites(JSON.parse(localStorage.getItem(getLSKey(uid)) || "[]"));
+    } catch {
+      setFavorites([]);
+    }
+  }, [uid]);
 
   useEffect(() => {
     (async () => {
@@ -92,11 +103,14 @@ export default function Favorites() {
   }, [favorites.length, sort]);
 
   const toggleFavorite = (id: string) => {
+    if (!uid) return;
+
     setFavorites((prev) => {
       const next = prev.filter((x) => x !== id);
-      localStorage.setItem(LS_KEY, JSON.stringify(next));
+      localStorage.setItem(getLSKey(uid), JSON.stringify(next));
       return next;
     });
+
     setExpandedId((prev) => (prev === id ? null : prev));
   };
 
@@ -141,7 +155,7 @@ export default function Favorites() {
                 about={n.about}
                 reviews={n.reviews ?? []}
                 isExpanded={expandedId === n.id}
-                isFavorite
+                isFavorite={favorites.includes(n.id)}
                 onToggleFavorite={() => toggleFavorite(n.id)}
                 onToggleReadMore={() =>
                   setExpandedId((prev) => (prev === n.id ? null : n.id))
