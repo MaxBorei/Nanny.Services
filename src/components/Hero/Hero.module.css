@@ -3,8 +3,7 @@
   grid-template-columns: 1fr 1fr;
 
   border-radius: var(--radius-16);
-  min-height: clamp(420px, 45vw, 648px);
-
+  height: calc(100svh - var(--header-h) - 64px);
   position: relative;
   background: transparent;
 }

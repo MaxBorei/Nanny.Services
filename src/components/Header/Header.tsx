@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
@@ -57,6 +57,9 @@ function getAuthErrorMessage(err: unknown): string {
 export default function Header({ variant = "transparent" }: HeaderProps) {
   const navigate = useNavigate();
 
+  const headerRef = useRef<HTMLElement | null>(null);
+
+  // === state (логика не менялась) ===
   const [open, setOpen] = useState(false);
 
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -69,6 +72,34 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
 
   const { user, isLoading } = useAuthUser();
 
+  // === измерение высоты header (без изменения логики UI) ===
+  useLayoutEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+
+    const setVar = () => {
+      document.documentElement.style.setProperty(
+        "--header-h",
+        `${el.offsetHeight}px`,
+      );
+    };
+
+    setVar();
+
+    const ro = new ResizeObserver(() => setVar());
+    ro.observe(el);
+
+    window.addEventListener("resize", setVar);
+    window.addEventListener("orientationchange", setVar);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", setVar);
+      window.removeEventListener("orientationchange", setVar);
+    };
+  }, []);
+
+  // === handlers (логика не менялась) ===
   const closeAuth = () => {
     setIsAuthOpen(false);
     setAuthError(null);
@@ -148,11 +179,11 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
     } catch (err: unknown) {
       setAuthError(getAuthErrorMessage(err));
       setIsSubmitting(false);
-
       setOptimisticName(null);
     }
   };
 
+  // pathname как у тебя (не менял)
   const pathname = window.location.pathname;
   const isNannies = pathname === "/nannies" || pathname.startsWith("/nannies/");
   const isFavorites =
@@ -162,106 +193,110 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
   const displayName =
     user?.displayName ?? optimisticName ?? user?.email ?? "User";
 
-  const mobileMenu = open ? (
-    <div className={css.mobileMenu} role="dialog" aria-modal="true">
-      <div className={css.mobileBackdrop} onClick={() => setOpen(false)} />
+  const mobileMenu = useMemo(() => {
+    if (!open) return null;
 
-      <div className={css.mobilePanel}>
-        <button
-          type="button"
-          className={css.mobileClose}
-          aria-label="Close menu"
-          onClick={() => setOpen(false)}
-        >
-          <svg className={css.closeIcon} aria-hidden="true">
-            <use href="/vite.svg#icon-close" />
-          </svg>
-        </button>
+    return (
+      <div className={css.mobileMenu} role="dialog" aria-modal="true">
+        <div className={css.mobileBackdrop} onClick={() => setOpen(false)} />
 
-        <nav className={css.navMobile} aria-label="Mobile">
-          <Link
-            className={css.mobileLink}
-            to="/"
+        <div className={css.mobilePanel}>
+          <button
+            type="button"
+            className={css.mobileClose}
+            aria-label="Close menu"
             onClick={() => setOpen(false)}
           >
-            Home
-          </Link>
+            <svg className={css.closeIcon} aria-hidden="true">
+              <use href="/vite.svg#icon-close" />
+            </svg>
+          </button>
 
-          <Link
-            className={css.mobileLink}
-            to="/nannies"
-            onClick={() => setOpen(false)}
-          >
-            Nannies
-          </Link>
+          <nav className={css.navMobile} aria-label="Mobile">
+            <Link
+              className={css.mobileLink}
+              to="/"
+              onClick={() => setOpen(false)}
+            >
+              Home
+            </Link>
 
-          <Link
-            className={css.mobileLink}
-            to="/favorites"
-            onClick={(e) => {
-              if (!user) {
-                e.preventDefault();
-                notifyLoginRequired();
-                openRegister();
-                return;
-              }
-              setOpen(false);
-            }}
-          >
-            Favorites
-          </Link>
-        </nav>
+            <Link
+              className={css.mobileLink}
+              to="/nannies"
+              onClick={() => setOpen(false)}
+            >
+              Nannies
+            </Link>
 
-        <div className={css.authMobile}>
-          {isLoading ? null : user ? (
-            <div className={css.userBarMobile}>
-              <div>
-                <span className={css.userIcon} aria-hidden="true">
-                  <svg className={css.userIconSvg}>
-                    <use href="/vite.svg#icon-user" />
-                  </svg>
-                </span>
+            <Link
+              className={css.mobileLink}
+              to="/favorites"
+              onClick={(e) => {
+                if (!user) {
+                  e.preventDefault();
+                  notifyLoginRequired();
+                  openRegister();
+                  return;
+                }
+                setOpen(false);
+              }}
+            >
+              Favorites
+            </Link>
+          </nav>
 
-                <span className={css.userNameMobile}>{displayName}</span>
+          <div className={css.authMobile}>
+            {isLoading ? null : user ? (
+              <div className={css.userBarMobile}>
+                <div>
+                  <span className={css.userIcon} aria-hidden="true">
+                    <svg className={css.userIconSvg}>
+                      <use href="/vite.svg#icon-user" />
+                    </svg>
+                  </span>
+
+                  <span className={css.userNameMobile}>{displayName}</span>
+                </div>
+
+                <button
+                  type="button"
+                  className={css.logoutBtnMobile}
+                  onClick={async () => {
+                    await handleLogout();
+                    setOpen(false);
+                  }}
+                >
+                  Log out
+                </button>
               </div>
+            ) : (
+              <>
+                <button
+                  className={css.authBtnGhost}
+                  type="button"
+                  onClick={openLogin}
+                >
+                  Log In
+                </button>
 
-              <button
-                type="button"
-                className={css.logoutBtnMobile}
-                onClick={async () => {
-                  await handleLogout();
-                  setOpen(false);
-                }}
-              >
-                Log out
-              </button>
-            </div>
-          ) : (
-            <>
-              <button
-                className={css.authBtnGhost}
-                type="button"
-                onClick={openLogin}
-              >
-                Log In
-              </button>
-
-              <button
-                className={css.authBtnPrimary}
-                type="button"
-                onClick={openRegister}
-              >
-                Registration
-              </button>
-            </>
-          )}
+                <button
+                  className={css.authBtnPrimary}
+                  type="button"
+                  onClick={openRegister}
+                >
+                  Registration
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  ) : null;
+    );
+  }, [open, user, isLoading, displayName]);
 
   return (
-    <header className={`${css.header} ${css[variant]}`}>
+    <header ref={headerRef} className={`${css.header} ${css[variant]}`}>
       <div className={css.inner}>
         <a className={css.logo} href="/">
           Nanny.Services
@@ -340,7 +375,9 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
             )}
           </div>
         </div>
+
         <ThemeSwitcher />
+
         <button
           type="button"
           className={css.burger}

@@ -10,15 +10,6 @@
   margin: 0;
 }
 
-body {
-  min-height: 100vh;
-  font-family: var(--font-family);
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-
 img,
 picture,
 video,
@@ -66,7 +57,10 @@ p {
   line-height: 1.5;
 }
 
-
 #root {
   min-height: 100vh;
+}
+
+body {
+  margin: 0;
 }

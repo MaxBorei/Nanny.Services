@@ -365,20 +365,20 @@
   }
 
   .avatar {
-    width: 56px;
-    height: 56px;
+    width: 70px;
+    height: 70px;
     border-radius: var(--radius-12);
   }
 
   .avatarImg {
-    width: 44px;
-    height: 44px;
+    width: 58px;
+    height: 58px;
     border-radius: var(--radius-12);
   }
 
   .onlineDot {
-    top: 6px;
-    right: 6px;
+    top: 3px;
+    right: 3px;
   }
 
   .header {
