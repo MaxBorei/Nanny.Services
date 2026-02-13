@@ -185,8 +185,8 @@
 }
 
 .favIconFilled {
-  fill: #f03f3b;
-  stroke: #f03f3b;
+  fill: var(--color-accent-primary);
+  stroke: var(--color-accent-primary);
   stroke-width: 2px;
 }
 
