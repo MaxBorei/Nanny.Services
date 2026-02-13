@@ -41,6 +41,10 @@
 }
 
 @media (max-width: 768px) {
+  .homePage {
+    padding: 16px;
+  }
+
   .bgLeft,
   .bgRight {
     width: 100%;
