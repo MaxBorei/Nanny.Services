@@ -407,7 +407,6 @@
   }
   .chip {
     height: auto;
-    width: 100%;
   }
   .chipTruncate {
     white-space: normal;
