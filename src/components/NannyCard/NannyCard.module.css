@@ -353,6 +353,9 @@
   opacity: 0.4;
   cursor: not-allowed;
 }
+.favBtn {
+  -webkit-tap-highlight-color: transparent;
+}
 
 @media (max-width: 768px) {
   .card {
