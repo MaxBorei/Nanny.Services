@@ -122,7 +122,7 @@
 
   /* базовые размеры вьюпорта */
   --vw-min: 320;
-  --vw-max: 1440;
+  --vw-max: 1280;
   --vw-range: calc(var(--vw-max) - var(--vw-min));
 
   /* ---------- FLUID FONT SIZES ---------- */

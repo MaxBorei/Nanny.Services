@@ -3,10 +3,5 @@
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 128px;
-}
-@media screen and (max-width: 768px) {
-  .container {
-    padding: 0 16px;
-  }
+  padding-inline: var(--fluid-container-pad);
 }
