@@ -85,3 +85,8 @@
   stroke: var(--color-text-third);
   stroke-width: 2px;
 }
+
+.error {
+  color: var(--color-error);
+  font-size: var(--fs-14);
+}

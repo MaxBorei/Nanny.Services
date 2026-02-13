@@ -354,7 +354,7 @@
   cursor: not-allowed;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .card {
     gap: var(--sp-12);
     position: relative;
@@ -405,11 +405,15 @@
   .chip {
     height: auto;
     width: 100%;
-    border-radius: 0;
   }
   .chipTruncate {
     white-space: normal;
     overflow: visible;
     word-break: break-word;
+  }
+  .appointmentBtnBox {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 }

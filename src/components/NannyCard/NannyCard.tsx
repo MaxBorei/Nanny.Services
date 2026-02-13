@@ -125,7 +125,10 @@ export function NannyCard({
                   : "Login required"
               }
               disabled={!user}
-              onClick={() => onToggleFavorite?.()}
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleFavorite?.();
+              }}
             >
               <svg
                 className={`${css.favIcon} ${
@@ -223,15 +226,17 @@ export function NannyCard({
               </ul>
             )}
 
-            <button
-              type="button"
-              className={css.appointmentBtn}
-              disabled={!user}
-              aria-label={user ? "Make an appointment" : "Login required"}
-              onClick={openModal}
-            >
-              Make an appointment
-            </button>
+            <div className={css.appointmentBtnBox}>
+              <button
+                type="button"
+                className={css.appointmentBtn}
+                disabled={!user}
+                aria-label={user ? "Make an appointment" : "Login required"}
+                onClick={openModal}
+              >
+                Make an appointment
+              </button>
+            </div>
 
             <Modal isOpen={isAppointment} onClose={closeModal}>
               <AppointmentForm

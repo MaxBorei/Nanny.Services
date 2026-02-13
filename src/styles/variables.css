@@ -32,6 +32,7 @@
   --color-text-hover: #f03f3b;
   --color-text-third: #11101c;
   --color-text-fourth: rgba(17, 16, 28, 0.5);
+  --color-error: #ff383c;
 
   /* Borders */
   --color-border-light: rgba(0, 0, 0, 0.08);
@@ -50,15 +51,15 @@
   --fw-bold: 700;
 
   /* Font sizes */
-  --fs-12: 12px;
-  --fs-14: 14px;
-  --fs-16: 16px;
-  --fs-18: 18px;
-  --fs-20: 20px;
-  --fs-24: 24px;
-  --fs-28: 28px;
-  --fs-40: 40px;
-  --fs-70: 70px;
+  --fs-12: clamp(8px, 0.75vw, 12px);
+  --fs-14: clamp(10px, 0.9vw, 14px);
+  --fs-16: clamp(12px, 1vw, 16px);
+  --fs-18: clamp(14px, 1.2vw, 18px);
+  --fs-20: clamp(16px, 1.4vw, 20px);
+  --fs-24: clamp(18px, 1.7vw, 24px);
+  --fs-28: clamp(20px, 2vw, 28px);
+  --fs-40: clamp(24px, 3vw, 40px);
+  --fs-70: clamp(32px, 5vw, 70px);
 
   /* Line heights */
   --lh-12: 16px;

@@ -96,7 +96,7 @@
   background: rgba(17, 16, 28, 0.06);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .section {
     padding: 0 var(--sp-24);
   }
