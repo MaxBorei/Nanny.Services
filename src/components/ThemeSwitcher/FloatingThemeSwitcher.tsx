@@ -1,4 +1,3 @@
-// src/components/FloatingThemeSwitcher/FloatingThemeSwitcher.tsx
 import { useEffect, useMemo, useState } from "react";
 import css from "./FloatingThemeSwitcher.module.css";
 
