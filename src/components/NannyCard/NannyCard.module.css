@@ -97,7 +97,7 @@
 .metaItem {
   display: inline-flex;
   align-items: center;
-  gap: clamp();
+  gap: 8px;
   max-width: 100%;
   position: relative;
   min-width: 0;
@@ -357,6 +357,8 @@
 @media (max-width: 900px) {
   .card {
     gap: var(--sp-12);
+    position: relative;
+    flex-direction: column;
   }
 
   .avatar {
@@ -383,16 +385,15 @@
   }
 
   .favBtn {
-    justify-self: start;
+    position: absolute;
+    top: 16px;
+    right: 16px;
   }
 
   .meta {
     gap: var(--sp-16);
+    row-gap: var(--sp-4);
   }
-
-  /* .meta_favorite {
-  gap: 48px;
-} */
 
   .metaItem:not(:last-child)::after {
     display: none;
@@ -400,5 +401,15 @@
 
   .metaText {
     max-width: 28ch;
+  }
+  .chip {
+    height: auto;
+    width: 100%;
+    border-radius: 0;
+  }
+  .chipTruncate {
+    white-space: normal;
+    overflow: visible;
+    word-break: break-word;
   }
 }
