@@ -34,7 +34,7 @@ export default function Favorites() {
 
   useEffect(() => {
     if (!uid) {
-      setFavorites([]); // logout -> очищаем
+      setFavorites([]);
       return;
     }
 
@@ -49,7 +49,7 @@ export default function Favorites() {
     (async () => {
       try {
         setLoading(true);
-        const res = await fetch(API_URL);
+        const res = await fetch(`${API_URL}/nannies.json`);
         if (!res.ok) throw new Error();
 
         const data = (await res.json()) as NanniesResponse;
