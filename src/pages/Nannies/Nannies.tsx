@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-// import Header from "../../components/Header/Header";
 import { NannyCard } from "../../components/NannyCard/NannyCard";
 import Loader from "../../components/Loader/Loader";
 import ErrorView from "../../components/ErrorView/ErrorView";
@@ -91,12 +90,14 @@ export default function Nannies() {
         setLoading(true);
         setError("");
 
-        const res = await fetch(API_URL, { signal: controller.signal });
+        const res = await fetch(`${API_URL}/nannies.json`, {
+          signal: controller.signal,
+        });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-        const data = (await res.json()) as NanniesResponse;
+        const data = (await res.json()) as NanniesResponse | null;
 
-        const list: Nanny[] = Object.entries(data || {}).map(([id, n]) => ({
+        const list = Object.entries(data ?? {}).map(([id, n]) => ({
           id,
           name: n.name,
           avatarUrl: n.avatar_url,
@@ -115,10 +116,10 @@ export default function Nannies() {
         }));
 
         setNannies(list);
+        setLoading(false);
       } catch (e) {
         if ((e as Error).name === "AbortError") return;
         setError((e as Error).message || "Failed to load nannies");
-      } finally {
         setLoading(false);
       }
     })();
